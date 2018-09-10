@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- title上面加圖片 -->
+    <link rel="Shortcut Icon" type="image/x-icon" href="cathay.ico">
+    <title>Cathay Domestic Equity Team</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/dashboard/dashboard.css">
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+<!--           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> -->
+          <a class="navbar-brand" href="#">Apple Delivery</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/?Product=IphoneX">IphoneX</a></li>
+            <li><a href="/?Product=Iphone8plus">Iphone8-plus</a></li>
+            <li><a href="#">Iphone3</a></li>
+          </ul>
+          <!-- <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form> -->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2 col-md-2 sidebar">
+
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="/?Product=Iphone8plus">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a id="Us" href="/?Country=Us&Product=Iphone8plus"">America</a></li>
+            <li><a href="/?Country=Cn&Product=Iphone8plus">China</a></li>
+            <li><a href="/?Country=Hk&Product=Iphone8plus">Hongcong</a></li>
+            <li><a href="/?Country=Jp&Product=Iphone8plus">Japan</a></li>
+            <li><a href="/?Country=Uk&Product=Iphone8plus">United Kindom</a></li>
+            <li><a href="/?Country=De&Product=Iphone8plus">German</a></li>
+            <li><a href="/?Country=Fr&Product=Iphone8plus">Franch</a></li>
+            <li><a href="/?Country=Sg&Product=Iphone8plus">Singapore</a></li>
+            <li><a href="/?Country=Ru&Product=Iphone8plus">Russin</a></li>
+          </ul>
+
+        </div>
+
+          <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="row placeholders">
+
+              <h2 id="Country" class="sub-header">{{title}}</h2>
+
+              <div class="table-responsive">
+                
+                {{table|safe}}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>
