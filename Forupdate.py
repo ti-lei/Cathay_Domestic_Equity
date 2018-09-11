@@ -158,8 +158,6 @@ def Update():
     #columns:行向量
 
 	df.to_csv('Data.csv',encoding='utf_8_sig', index=False)
-	df.to_csv('/stastic/Data.csv',encoding='utf_8_sig', index=False)
-
 	return "true"
 
 @app.route("/")
@@ -178,8 +176,6 @@ def hello():
 
 	#--------------------- Maping 不同的 國家的名字 ---------------------#
 	All_countries = {'Us':'美國','Cn':'中國','Jp':'日本','Hk':'香港','Uk':'英國','De':'德國','Ru':'俄羅斯','Fr':'法國','Sg':'新加坡'}
-	All_countries_E = {'Us':'United State','Cn':'China','Jp':'Japan','Hk':'Hong kong','Uk':'Unkted Kingdom','De':'German','Ru':'Russia',
-						'Fr':'French','Sg':'Singapor'}
 
 	df['All_countries'] = df.Country.map(All_countries)
 	#只把我們要的 product 拿出來
@@ -204,21 +200,16 @@ def hello():
 	if Product == 'IphoneX':
 	# 如果 Country 不是空的就把全部都秀出來
 		if not Country :
-		    return render_template("IphoneX.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-		    	Title = 'Overview',Product = Product)
-
-		country_title = All_countries_E[Country]
-		return render_template("IphoneX.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-			Title = country_title, Country=Country, Product = Product)
+		    return render_template("IphoneX.html", table = pivot.to_html(classes = "table table-striped table-hover"),title = 'Overview')
+		country_title = All_countries[Country]
+		return render_template("IphoneX.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),title = country_title, country=Country)
 
 	elif Product == 'Iphone8plus':
 
 		if not Country :
-		    return render_template("Iphone8plus.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-		    	Title = 'Overview',Product = Product)
+		    return render_template("Iphone8plus.html", table = pivot.to_html(classes = "table table-striped table-hover"),title = 'Overview')
 		country_title = All_countries[Country]
-		return render_template("Iphone8plus.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-			Title = country_title, Country=Country, Product = Product)
+		return render_template("Iphone8plus.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),title = country_title)
 
 if __name__ == "__main__":
     # app.run(debug=True, host='0.0.0.0', port=80)
