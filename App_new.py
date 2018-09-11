@@ -1,3 +1,5 @@
+# This Python file uses the following encoding: utf-8
+# encoding: utf-8
 from flask import Flask, jsonify, request, send_from_directory, url_for
 from flask import render_template
 import requests
