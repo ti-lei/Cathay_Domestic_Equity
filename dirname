@@ -13,12 +13,10 @@ app = Flask(__name__, static_folder='static', static_url_path='')
 
 @app.route("/move")
 def Move():
-	dir1 = os.getcwd()
-	dirname = dir1 + '\static\Data.csv'
-	
-	copyname = dir1 + '\Data.csv'
-	shutil.copy2(copyname, dirname)
-	return copyname
+	dirname = os.getcwd()
+	dirname = dirname + '\static'
+	shutil.copy2('App_new.py', 'dirname')
+	return dirname
 
 
 @app.route("/update")
