@@ -13,6 +13,57 @@ import datetime
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 
+username = 'cathayequity'
+password = '123'
+# datetime.datetime.now().strftime("%Y%m%d")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Get Form Fields
+        username_candidate = request.form['username']
+        password_candidate = request.form['password']
+
+        if username_candidate == username:
+
+            if password == password_candidate:
+
+                session['logged_in'] = True
+                session['username'] = username
+
+                flash('You are now logged in', 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                error = 'Invalid login'
+                return render_template('login.html', error=error)
+
+        else:
+            error = 'Username not found'
+            return render_template('login.html', error=error)
+
+    return render_template('login.html')
+
+# Check if user logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('login'))
+    return wrap
+
+# Logout
+@app.route('/logout')
+@is_logged_in
+def logout():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
+
+
 @app.route("/move")
 def Move():
 	# 將Data.csv 從目前的資料夾移到 static 資料夾下面
@@ -23,27 +74,17 @@ def Move():
 	#來源資料
 	fromname = dir1 + '/Data.csv'
 	shutil.copy2(fromname, destname)
-	return ("Already move to  "+ destname)
+	return copyname
 
 
 @app.route("/update")
 def Update():
 
-	Data = pd.read_csv("Data.csv")
-	Old_Data = Data.to_dict('records')
+	# Data = pd.read_csv("Data.csv")
+	# Old_Data = Data.to_dict('records')
 
 	countries = {
-	'IphoneXsMax':{
-	'Tw':['MT512TA/A','MT542TA/A','MT572TA/A','MT502TA/A','MT532TA/A','MT562TA/A','MT522TA/A','MT552TA/A','MT582TA/A'],
-	'Cn':['MT722CH/A','MT752CH/A','MT782CH/A','MT712CH/A','MT742CH/A','MT772CH/A','MT732CH/A','MT762CH/A','MT792CH/A'],
-	'Jp':['MT6R2J/A','MT6V2J/A','MT6Y2J/A','MT6Q2J/A','MT6U2J/A','MT6X2J/A','MT6T2J/A','MT6W2J/A','MT702J/A'],
-	'Hk':['MT722ZA/A','MT752ZA/A','MT782ZA/A','MT712ZA/A','MT742ZA/A','MT772ZA/A','MT732ZA/A','MT762ZA/A','MT792ZA/A'],
-	'Uk':['MT512B/A','MT542B/A','MT572B/A','MT502B/A','MT532B/A','MT562B/A','MT522B/A','MT552B/A','MT582B/A'],
-	'De':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
-	'Ru':['MT512RU/A','MT542RU/A','MT572RU/A','MT502RU/A','MT532RU/A','MT562RU/A','MT522RU/A','MT552RU/A','MT582RU/A'],
-	'Fr':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
-	'Sg':['MT512ZP/A','MT542ZP/A','MT572ZP/A','MT502ZP/A','MT532ZP/A','MT562ZP/A','MT522ZP/A','MT552ZP/A','MT582ZP/A']},
-
+	#IphoneXs
 	'IphoneXs':{
 	'Tw':['MT9F2TA/A','MT9J2TA/A','MT9M2TA/A','MT9E2TA/A','MT9H2TA/A','MT9L2TA/A','MT9G2TA/A','MT9K2TA/A','MT9N2TA/A'],
 	'Cn':['MT9Q2CH/A','MT9U2CH/A','MT9X2CH/A','MT9P2CH/A','MT9T2CH/A','MT9W2CH/A','MT9R2CH/A','MT9V2CH/A','MT9Y2CH/A'],
@@ -117,11 +158,6 @@ def Update():
 
 	
 	Us =[
-		#IphoneXr
-		'MT3L2LL/A', 'MT3U2LL/A','MT412LL/A','MT3K2LL/A','MT3T2LL/A', 'MT402LL/A','MT3R2LL/A','MT3Y2LL/A', 'MT462LL/A',
-		'MT3N2LL/A','MT3W2LL/A','MT442LL/A', 'MT3Q2LL/A','MT3X2LL/A','MT452LL/A', 'MT3M2LL/A','MT3V2LL/A','MT422LL/A',
-		#IphoneXsMax
-		'MT5A2LL/A','MT5E2LL/A','MT5H2LL/A','MT592LL/A','MT5D2LL/A','MT5G2LL/A','MT5C2LL/A','MT5F2LL/A','MT5J2LL/A',
 		#IphoneXs
 		'MT952LL/A','MT982LL/A','MT9C2LL/A','MT942LL/A','MT972LL/A','MT9A2LL/A','MT962LL/A','MT992LL/A','MT9D2LL/A',
 		#Iphone8plus
@@ -132,10 +168,9 @@ def Update():
 		# 'MQA62LL/A','MQA92LL/A','MQA52LL/A','MQA82LL/A']
 
 
-	IphoneXr_us = ['MT3L2LL/A', 'MT3U2LL/A','MT412LL/A','MT3K2LL/A','MT3T2LL/A', 'MT402LL/A','MT3R2LL/A','MT3Y2LL/A', 'MT462LL/A','MT3N2LL/A',
-				'MT3W2LL/A','MT442LL/A', 'MT3Q2LL/A','MT3X2LL/A','MT452LL/A', 'MT3M2LL/A','MT3V2LL/A','MT422LL/A']
+	IphoneXr_us = []
 	IphoneXs_us = ['MT952LL/A','MT982LL/A','MT9C2LL/A','MT942LL/A','MT972LL/A','MT9A2LL/A','MT962LL/A','MT992LL/A','MT9D2LL/A']
-	IphoneXs_Max_us = ['MT5A2LL/A','MT5E2LL/A','MT5H2LL/A','MT592LL/A','MT5D2LL/A','MT5G2LL/A','MT5C2LL/A','MT5F2LL/A','MT5J2LL/A']
+	IphoneXs_Max_us = []
 
 	Iphone8_us = ['MQ6L2LL/A', 'MQ7G2LL/A','MQ6M2LL/A', 'MQ7H2LL/A','MQ6K2LL/A','MQ7F2LL/A']
 	Iphone8plus_us = ['MQ8E2LL/A','MQ8H2LL/A','MQ8F2LL/A','MQ8J2LL/A','MQ8D2LL/A','MQ8G2LL/A']
@@ -149,47 +184,42 @@ def Update():
 			#iphone8
 			'MQ6H2', 'MQ6W2', 'MQ702','MQ7D2', 'MQ7R2', 'MQ7V2','MQ6L2', 'MQ732', 'MQ762','MQ7G2', 'MQ7Y2', 'MQ822','MQ792','MQ852',
 			#iphoneXs
-			'MT952','MT982','MT9C2','MT9F2','MT9J2','MT9M2','MT9Q2','MT9U2','MT9X2','MTAX2','MTE12','MTE42',
-			#iphoneXsMax
-			'MT512','MT542','MT572','MT5A2','MT5E2','MT5H2','MT6R2','MT6V2','MT6Y2','MT722','MT752','MT782']
+			'MT952','MT982','MT9C2','MT9F2','MT9J2','MT9M2','MT9Q2','MT9U2','MT9X2','MTAX2','MTE12','MTE42']
 
 	Gold = ['MQ8F2', 'MQ9F2', 'MQ982','MQ8J2', 'MQ9C2', 'MQ9J2', 'MQ8N2', 'MQ8V2', 'MQ922','MQ8R2', 'MQ8Y2', 'MQ952','MQ9M2','MQ9Q2',
 			#iphone8
 			'MQ6M2', 'MQ742', 'MQ772', 'MQ7H2', 'MQ802', 'MQ832', 'MQ6J2', 'MQ6X2', 'MQ712', 'MQ7E2', 'MQ7T2', 'MQ7W2','MQ7A2','MQ862',
 			#iphoneXs
-			'MT962','MT992','MT9D2','MT9G2','MT9K2','MT9N2','MT9R2','MT9V2','MT9Y2','MTAY2','MTE22','MTE52',
-			#iphoneXsMax
-			'MT522','MT552','MT5F2','MT582','MT5C2','MT6W2','MT5J2','MT6T2','MT762','MT702','MT732','MT792']
+			'MT962','MT992','MT9D2','MT9G2','MT9K2','MT9N2','MT9R2','MT9V2','MT9Y2','MTAY2','MTE22','MTE52']
 
 	Gray = ['MQ8D2', 'MQ9D2', 'MQ962', 'MQ8G2', 'MQ9G2', 'MQ992', 'MQ8L2', 'MQ8T2', 'MQ902', 'MQ8P2', 'MQ8W2', 'MQ932','MQ9K2','MQ9N2',
 			'MQAJ2', 'MQAQ2', 'MQAC2', 'MQAM2', 'MQAU2', 'MQAF2','MQCR2', 'MQCK2', 'MQAX2', 'MQA52','MQCV2', 'MQCN2', 'MQC12', 'MQA82',
 			#iphone8
 			'MQ6K2','MQ722','MQ752','MQ7F2','MQ7X2','MQ812','MQ6G2','MQ6V2', 'MQ6Y2','MQ7C2','MQ7Q2','MQ7U2','MQ782','MQ842',
 			#iphoneXs
-			'MT942','MT972','MT9A2','MT9E2','MT9H2','MT9L2','MT9P2','MT9T2','MT9W2','MTAW2','MTE02','MTE32',
-			#iphoneXsMax
-			'MT502','MT532','MT562','MT592','MT5D2','MT5G2','MT6Q2','MT6U2','MT6X2','MT712','MT742','MT772']
+			'MT942','MT972','MT9A2','MT9E2','MT9H2','MT9L2','MT9P2','MT9T2','MT9W2','MTAW2','MTE02','MTE32']
+
 
 	Red = ['MRTG2', 'MRTJ2', 'MRT72', 'MRTH2', 'MRTK2', 'MRT82', 'MRTC2', 'MRTE2', 'MRT92', 'MRTA2', 'MRTD2', 'MRTF2','MRTL2','MRTM2',
 			#iphone8
 			'MRRK2', 'MRRR2', 'MRRT2', 'MRRL2', 'MRRW2', 'MRRX2', 'MRRM2', 'MRRP2', 'MRRQ2', 'MRRN2', 'MRRU2', 'MRRV2',
 			#iphoneXr
-			 'MT3M2','MT3V2','MT422','MRY62','MRYE2','MRYM2','MT142','MT1D2','MT1L2','MT062','MT0N2','MT0X2']
+			'MRY62','MRYE2','MRYM2','MT142','MT1D2','MT1L2','MT062','MT0N2','MT0X2']
 
 	White = [#iphoneXr
-			'MT3L2', 'MT3U2','MT412','MRY52', 'MRYD2', 'MRYL2', 'MT132', 'MT1A2', 'MT1J2', 'MT032', 'MT0J2', 'MT0W2']
+			'MRY52', 'MRYD2', 'MRYL2', 'MT132', 'MT1A2', 'MT1J2', 'MT032', 'MT0J2', 'MT0W2']
 
 	Black = [#iphoneXr
-			'MT3K2','MT3T2', 'MT402','MRY42','MRY92', 'MRYJ2','MT122','MT192', 'MT1H2','MT002','MT0G2', 'MT0V2']
+			'MRY42','MRY92', 'MRYJ2','MT122','MT192', 'MT1H2','MT002','MT0G2', 'MT0V2']
 
 	Blue = [#iphoneXr
-			'MT3R2','MT3Y2', 'MT462','MRYA2','MRYH2', 'MRYQ2','MT182','MT1G2', 'MT1Q2','MT0E2','MT0U2', 'MT112']
+			'MRYA2','MRYH2', 'MRYQ2','MT182','MT1G2', 'MT1Q2','MT0E2','MT0U2', 'MT112']
 
 	Yellow = [#iphoneXr 
-			'MT3N2','MT3W2','MT442', 'MRY72','MRYF2','MRYN2','MT162','MT1E2','MT1M2','MT082','MT0Q2','MT0Y2']
+			'MRY72','MRYF2','MRYN2','MT162','MT1E2','MT1M2','MT082','MT0Q2','MT0Y2']
 
 	Coral = [#iphoneXr
-			'MT3Q2','MT3X2','MT452','MRY82','MRYG2','MRYP2','MT172','MT1F2','MT1P2','MT0A2','MT0T2','MT102']
+			'MRY82','MRYG2','MRYP2','MT172','MT1F2','MT1P2','MT0A2','MT0T2','MT102']
 
 
 	#---------------------------------------------------------------- SIZE -------------------------------------------------------------#
@@ -205,18 +235,15 @@ def Update():
 
 				#IphoneXr
 				'MRY52','MRY42','MRYA2','MRY72','MRY82','MRY62','MT132','MT122','MT182','MT162','MT172','MT142','MT032','MT002','MT0E2',
-				'MT082','MT0A2','MT062','MT3L2','MT3K2','MT3R2','MT3N2','MT3Q2', 'MT3M2',
+				'MT082','MT0A2','MT062',
 
 				#IphoneXs
-				'MT942','MT952','MT962','MT9E2','MT9F2','MT9G2','MT9P2','MT9Q2','MT9R2','MTAW2','MTAX2','MTAY2',
-
-				#IphoneXsMax
-				'MT502','MT512','MT522','MT592','MT5A2','MT5C2','MT6Q2','MT6R2','MT6T2','MT712','MT722','MT732']
+				'MT942','MT952','MT962','MT9E2','MT9F2','MT9G2','MT9P2','MT9Q2','MT9R2','MTAW2','MTAX2','MTAY2']
 
 	Size_OneTwoEight = [
 				#IphonXr
 				'MRYD2','MRY92','MRYH2','MRYF2','MRYG2','MRYE2','MT1A2','MT192','MT1G2','MT1E2','MT1F2','MT1D2', 'MT0J2','MT0G2','MT0U2',
-				'MT0Q2','MT0T2','MT0N2','MT3U2','MT3T2','MT3Y2','MT3W2','MT3X2','MT3V2']
+				'MT0Q2','MT0T2','MT0N2']
 
 					
 	Size_TwoFiveSix = [
@@ -228,11 +255,9 @@ def Update():
 					'MQ952','MQ8Q2', 'MQ8X2', 'MQ942','MQ8P2', 'MQ8W2', 'MQ932','MRTA2', 'MRTD2', 'MRTF2','MQ852','MQ862','MQ842',
 					#IphoneXr
 					'MRYL2','MRYJ2','MRYQ2','MRYN2','MRYP2','MRYM2','MT1J2','MT1H2','MT1Q2','MT1M2','MT1P2','MT1L2','MT0W2','MT0V2',
-					'MT112','MT0Y2','MT102','MT0X2','MT412', 'MT402', 'MT462','MT442', 'MT452','MT422',
+					'MT112','MT0Y2','MT102','MT0X2',
 					#IphoneXs
-					'MT972','MT982','MT992','MT9H2','MT9J2','MT9K2','MT9T2','MT9U2','MT9V2','MTE02','MTE12','MTE22',
-					#IphoneXsMax
-					'MT532','MT542','MT552','MT5D2','MT5E2','MT5F2','MT6U2','MT6V2','MT6W2','MT742','MT752','MT762']
+					'MT972','MT982','MT992','MT9H2','MT9J2','MT9K2','MT9T2','MT9U2','MT9V2','MTE02','MTE12','MTE22']
 
 
 	#---------------------拿到所有 iphone 分 不同產品的 model 的型號--------------------------#
@@ -254,14 +279,12 @@ def Update():
 	# 把list 展開成一層
 	IphoneXs = [newlist for sublist in mylist for newlist in sublist]
 
-	mylist = [v for v in countries['IphoneXsMax'].values()]
-	# 把list 展開成一層
-	IphoneXs_Max = [newlist for sublist in mylist for newlist in sublist]
 
+	IphoneXs_Max=[]
 	# IphoneXr = []
 	# Iphone8plus=[]
 	# Iphone8=[]
-	# IphoneXs = []
+
 	# mylist = [v for v in countries['IphoneX'].values()]
 	# # 把list 展開成一層
 	# IphoneX = [newlist for sublist in mylist for newlist in sublist]
@@ -385,9 +408,9 @@ def Update():
 
 	#把舊資料跟新資料合起來
 
-	newres = res + Old_Data
+	# newres = res + Old_Data
 
-	df = pd.DataFrame(newres)
+	df = pd.DataFrame(res)
 
     # Pivot value:欲處理的資訊(相加 取平均 等等等)
     #index:列向量
@@ -398,7 +421,8 @@ def Update():
 	return render_template("index.html",table = df.to_html(classes = "table table-striped table-hover"))
 
 
-@app.route("/")
+@app.route("/dashboard")
+@is_logged_in
 def dashboard():
     # 進行 request
     # 對網頁拿資訊
@@ -495,5 +519,6 @@ def dashboard():
 				Title = country_title, Country=Country, Product = Product)	
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=80)
-    # app.run(debug=True)
+    # app.run(debug=True, host='0.0.0.0', port=80)
+    app.secret_key = 'secret123'
+    app.run(debug=True)

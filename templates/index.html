@@ -1,0 +1,51 @@
+<html>
+  <head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/3.3/examples/dashboard/dashboard.css" rel="stylesheet">
+
+    <title></title>
+    <style type="text/css">
+      td{
+        white-space: nowrap;
+        /*表格裡面不要換行*/
+        padding: 5px; 
+        /*把表格的距離調到5px*/
+      }
+    </style>
+  </head>
+
+  <!--This is a comment. Comments are not displayed in the browser-->
+  <body class="table-responsive">
+
+      <!--固定的寫法 把df送到這個位置-->
+      <!--來自 flask 的 return render_template("index.html", df=df.to_html(), pivot=pivot.to_html())-->
+      {{table|safe}}
+      <br/>       
+      <br/>
+
+<!--       <form action="/">
+
+        index:         <!--下拉式選單旁邊顯示的文字-->
+        <!-- <select name="index"> request以後送回的變數名稱 -->
+<!--           <option value="color">color </option>
+          <option value="country">country</option>
+          <option value="size">size</option>
+          <option value="TimeStemp">TimeStemp</option>
+        </select>
+
+        column:
+        <select name="column">
+          <option value="color">color </option>
+          <option value="country">country</option>
+          <option value="size">size</option>
+          <option value="TimeStemp">TimeStemp</option>
+        </select> -->
+        <!--按鈕-->
+<!--         <input type="submit">
+      </form> --> 
+      <br/>
+      <!--固定的寫法 把pivot放到這裡-->
+
+  </body>
+</html>
