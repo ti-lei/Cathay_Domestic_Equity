@@ -14,7 +14,7 @@ import datetime
 app = Flask(__name__, static_folder='static', static_url_path='')
 
 username = 'Cathayequity'
-password = 'domybest'
+password = 'XDDDDD'
 # datetime.datetime.now().strftime("%Y%m%d")
 
 
@@ -48,12 +48,10 @@ def login():
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        print(session['logged_in'])
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            print("no fuck")
-            # return redirect(url_for('login'))
+            return redirect(url_for('login'))
     return wrap
 
 @app.route('/')
