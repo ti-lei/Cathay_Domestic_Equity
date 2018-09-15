@@ -13,6 +13,52 @@ import datetime
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 
+username = 'Cathayequity'
+password = 'showmethemoney'
+# datetime.datetime.now().strftime("%Y%m%d")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Get Form Fields
+        username_candidate = request.form.get('username',False)
+        password_candidate = request.form.get('password',False)
+
+        if username_candidate == username:
+
+            if  password_candidate == password:
+                # Passed
+                session['logged_in'] = True
+                session['username'] = username
+
+                # flash('You are now logged in', 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                error = 'Wrong Password'
+                return render_template('login.html', error=error)
+
+        else:
+            error = 'Username not found'
+            return render_template('login.html', error=error)
+
+    return render_template('login.html')
+
+# Check if user logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('login'))
+    return wrap
+
+@app.route('/')
+def index():
+    return render_template('login.html')
+
 @app.route("/move")
 def Move():
 	# 將Data.csv 從目前的資料夾移到 static 資料夾下面
@@ -398,7 +444,8 @@ def Update():
 	return render_template("index.html",table = df.to_html(classes = "table table-striped table-hover"))
 
 
-@app.route("/")
+@app.route("/delivery-message")
+@is_logged_in
 def dashboard():
     # 進行 request
     # 對網頁拿資訊
@@ -418,14 +465,19 @@ def dashboard():
 	#只把我們要的 product 拿出來
 	df = df[df['Product']==Product]
 
+	#想辦法把該產品的Size catagories 取出來成為一個陣列
+	Product_Categories = df['Size'].unique().tolist()
+	df["Size"] = df["Size"].astype('category', categories=Product_Categories)
 
 	pivot = pd.pivot_table(df, values='Deliver', index=Index,
 	    columns=['All_countries','Color','Size'], aggfunc=lambda x: ' '.join(x)).sort_index(ascending=False)
 
 	#---------------------     協理要的國家排序    ---------------------#
 	cols = ['美國','中國','香港','台灣','日本','德國','法國','新加坡','俄羅斯']
+	cols2 = ['64GB','256GB','512GB']
 	try:
 		pivot = pivot[cols]
+
 	finally:
 	#df_fill_country會把篩選過後的表格輸出
 		df_fill_country = df[df['Country']==Country]
@@ -495,5 +547,8 @@ def dashboard():
 				Title = country_title, Country=Country, Product = Product)	
 
 if __name__ == "__main__":
+    app.secret_key='secret123'
     app.run(debug=True, host='0.0.0.0', port=80)
+
     # app.run(debug=True)
+
