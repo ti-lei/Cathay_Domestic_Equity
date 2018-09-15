@@ -14,7 +14,7 @@ import datetime
 app = Flask(__name__, static_folder='static', static_url_path='')
 
 username = 'Cathayequity'
-password = 'showmethemoney'
+password = 'domybest'
 # datetime.datetime.now().strftime("%Y%m%d")
 
 
@@ -31,7 +31,7 @@ def login():
                 # Passed
                 session['logged_in'] = True
                 session['username'] = username
-
+                
                 # flash('You are now logged in', 'success')
                 return redirect(url_for('dashboard'))
             else:
@@ -48,16 +48,17 @@ def login():
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
+        print(session['logged_in'])
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            flash('Unauthorized, Please login', 'danger')
-            return redirect(url_for('login'))
+            print("no fuck")
+            # return redirect(url_for('login'))
     return wrap
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return redirect(url_for('login'))
 
 @app.route("/move")
 def Move():
@@ -444,6 +445,7 @@ def Update():
 	return render_template("index.html",table = df.to_html(classes = "table table-striped table-hover"))
 
 
+
 @app.route("/delivery-message")
 @is_logged_in
 def dashboard():
@@ -547,8 +549,7 @@ def dashboard():
 				Title = country_title, Country=Country, Product = Product)	
 
 if __name__ == "__main__":
+    # app.run(debug=True, host='0.0.0.0', port=80)
     app.secret_key='secret123'
-    app.run(debug=True, host='0.0.0.0', port=80)
-
-    # app.run(debug=True)
+    app.run(debug=True)
 
