@@ -70,6 +70,17 @@ def Move():
 	shutil.copy2(fromname, destname)
 	return ("Already move to  "+ destname)
 
+@app.route("/moveback")
+def Move():
+	# 將Data.csv 從目前的資料夾移到 static 資料夾下面
+	# 路徑上 for linux: 要用 /   for windows:\
+	dir1 = os.getcwd()
+	#要去哪裡
+	destname = dir1 + '/Data.csv'
+	#來源資料
+	fromname = dir1 + '/static/Data.csv'
+	shutil.copy2(fromname, destname)
+	return ("Already move to  "+ destname)
 
 @app.route("/update")
 def Update():
