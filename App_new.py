@@ -71,7 +71,7 @@ def Move():
 	return ("Already move to  "+ destname)
 
 @app.route("/moveback")
-def Move():
+def Moveback():
 	# 將Data.csv 從目前的資料夾移到 static 資料夾下面
 	# 路徑上 for linux: 要用 /   for windows:\
 	dir1 = os.getcwd()
