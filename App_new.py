@@ -54,6 +54,9 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+
+
+
 @app.route('/')
 def index():
     return redirect(url_for('login'))
@@ -332,6 +335,7 @@ def Update():
 		d['TimeStemp'] = datetime.datetime.today().strftime("%Y-%m-%d")
 
 		#Different Size
+
 		if Model[0:5] in Size_SixFour :
 			d['Size'] = '64GB'
 		elif Model[0:5] in Size_OneTwoEight :
