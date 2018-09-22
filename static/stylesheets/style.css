@@ -20,10 +20,24 @@ table, td, th {
   margin-left: auto;
 }
 
+body{
+  padding-top: 0px;
+}
+
 .btn {
   margin-top: 25px;
   margin-right: auto;
 }
+
+.navbar-fixed-bottom, .navbar-fixed-top{
+  position:initial;
+}
+
+
+.navbar-toggle .pull-right{
+  border-color:#ff0000;
+}
+
 
 .nav-sidebar > li > a > img{
   width:35px;
@@ -62,9 +76,13 @@ table, td, th {
   color: #ecdbff;
   background-color: #000000;
 }
+
 .navbar-default .navbar-toggle {
-  border-color: #000000;
+ border-color: red;
 }
+/*.navbar-default .navbar-toggle {
+  border-color: #000000;
+}*/
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
   background-color: #000000;

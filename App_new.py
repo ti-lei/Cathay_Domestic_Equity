@@ -92,7 +92,31 @@ def Update():
 	Old_Data = Data.to_dict('records')
 
 	countries = {
-	'IphoneXsMax':{
+	'AppleWatch4':{
+	'Cn': ['MU642CH/A','MTVA2CH/A','MU6A2CH/A','MTVR2CH/A'],
+	'Jp': ['MU642J/A','MU6A2J/A','MTVA2J/A','MTVR2J/A'],
+	'Hk': ['MU642ZP/A','MU6A2ZP/A','MTVA2ZP/A','MTVR2ZP/A'],
+	'Uk': ['MU642B/A','MU6A2B/A','MTVA2B/A','MTVR2B/A'],
+	'De': ['MU642FD/A','MU6A2FD/A','MTVA2FD/A','MTVR2FD/A'],
+	'Ru': ['MU642RU/A','MU6A2RU/A'], #38.42 GPS
+	'Fr': ['MU642NF/A','MU6A2NF/A','MTVA2NF/A','MTVR2NF/A'],
+	'Sg': ['MU642ZA/A','MU6A2ZA/A','MTVA2ZA/A','MTVR2ZA/A']
+	},
+	
+
+	'AppleWatch3':{
+	'Tw': ['MTEY2TA/A','MTGN2TA/A', 'MTF22TA/A', 'MTH12TA/A'],
+	'Cn': ['MTEY2CH/A','MTGK2CH/A','MTF22CH/A','MTGX2CH/A'],
+	'Jp': ['MTEY2J/A', 'MTGN2J/A','MTF22J/A','MTH12J/A'],
+	'Hk': ['MTEY2ZP/A', 'MTGN2ZP/A', 'MTF22ZP/A','MTH12ZP/A'],
+	'Uk': ['MTEY2B/A','MTGN2B/A','MTF22B/A','MTH12B/A'],
+	'De': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
+	'Ru': ['MTEY2RU/A','MTF22RU/A'], #38.42 GPS
+	'Fr': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
+	'Sg': ['MTEY2ZP/A','MTGN2ZP/A','MTF22ZP/A','MTH12ZP/A']
+	},
+
+	'IphoneXs-Max':{
 	'Tw':['MT512TA/A','MT542TA/A','MT572TA/A','MT502TA/A','MT532TA/A','MT562TA/A','MT522TA/A','MT552TA/A','MT582TA/A'],
 	'Cn':['MT722CH/A','MT752CH/A','MT782CH/A','MT712CH/A','MT742CH/A','MT772CH/A','MT732CH/A','MT762CH/A','MT792CH/A'],
 	'Jp':['MT6R2J/A','MT6V2J/A','MT6Y2J/A','MT6Q2J/A','MT6U2J/A','MT6X2J/A','MT6T2J/A','MT6W2J/A','MT702J/A'],
@@ -143,7 +167,8 @@ def Update():
 	 'MRYQ2ZP/A','MRY72ZP/A','MRYF2ZP/A','MRYN2ZP/A', 'MRY82ZP/A','MRYG2ZP/A','MRYP2ZP/A', 'MRY62ZP/A','MRYE2ZP/A','MRYM2ZP/A']},
 
 
-	'Iphone8plus':{	'Tw': ['MQ8M2TA/A', 'MQ8Q2TA/A','MQ8L2TA/A','MQ8P2TA/A','MQ8N2TA/A', 'MQ8R2TA/A'],
+	'Iphone8-plus':{
+	'Tw': ['MQ8M2TA/A', 'MQ8Q2TA/A','MQ8L2TA/A','MQ8P2TA/A','MQ8N2TA/A', 'MQ8R2TA/A'],
 	'Cn': ['MQ8E2CH/A','MQ8H2CH/A','MQ8F2CH/A','MQ8J2CH/A','MQ8D2CH/A','MQ8G2CH/A'],
 	'Jp': ['MQ9L2J/A','MQ9P2J/A','MQ9M2J/A','MQ9Q2J/A','MQ9K2J/A','MQ9N2J/A'],
 	'Hk': ['MQ8E2ZP/A','MQ8H2ZP/A','MQ8F2ZP/A','MQ8J2ZP/A','MQ8D2ZP/A','MQ8G2ZP/A'],
@@ -154,7 +179,8 @@ def Update():
 	'Sg': ['MQ8M2ZP/A','MQ8Q2ZP/A','MQ8N2ZP/A','MQ8R2ZP/A','MQ8L2ZP/A','MQ8P2ZP/A']},
 
 
-	'Iphone8':{ 'Tw': ['MQ6H2TA/A', 'MQ7D2TA/A','MQ6J2TA/A','MQ7E2TA/A','MQ6G2TA/A', 'MQ7C2TA/A'],
+	'Iphone8':{
+	'Tw': ['MQ6H2TA/A', 'MQ7D2TA/A','MQ6J2TA/A','MQ7E2TA/A','MQ6G2TA/A', 'MQ7C2TA/A'],
 	'Cn': ['MQ6L2CH/A', 'MQ7G2CH/A','MQ6M2CH/A','MQ7H2CH/A','MQ6K2CH/A', 'MQ7F2CH/A'],
 	'Jp': ['MQ792J/A', 'MQ852J/A','MQ7A2J/A','MQ862J/A','MQ782J/A', 'MQ842J/A'],
 	'Hk': ['MQ6L2ZP/A', 'MQ7G2ZP/A','MQ6M2ZP/A','MQ7H2ZP/A','MQ6K2ZP/A', 'MQ7F2ZP/A'],
@@ -162,98 +188,91 @@ def Update():
 	'De': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
 	'Ru': ['MQ6H2RU/A','MQ7D2RU/A','MQ6J2RU/A','MQ7E2RU/A','MQ6G2RU/A', 'MQ7C2RU/A'],
 	'Fr': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
-	'Sg': ['MQ6H2ZP/A','MQ7D2ZP/A','MQ6J2ZP/A','MQ7E2ZP/A','MQ6G2ZP/A', 'MQ7C2ZP/A']}
-
-	# 'IphoneX':{ 'Cn': ['MQA62CH/A', 'MQA92CH/A','MQA52CH/A','MQA82CH/A'],
-	# 'Jp': ['MQAY2J/A', 'MQC22J/A','MQAX2J/A','MQC12J/A'],
-	# 'Hk': ['MQA62ZP/A', 'MQA92ZP/A','MQA52ZP/A','MQA82ZP/A'],
-	# 'Uk': ['MQAG2B/A', 'MQAD2B/A','MQAF2B/A','MQAC2B/A'],
-	# 'De': ['MQAC2ZD/A','MQAF2ZD/A','MQAG2ZD/A','MQAD2ZD/A'],
-	# 'Ru': ['MQAG2RU/A','MQAD2RU/A','MQAC2RU/A','MQAF2RU/A'],
-	# 'Fr': ['MQAG2ZD/A','MQAD2ZD/A','MQAC2ZD/A','MQAF2ZD/A'],
-	# 'Sg': ['MQAG2ZP/A','MQAD2ZP/A','MQAF2ZP/A','MQAC2ZP/A']}
-	}
+	'Sg': ['MQ6H2ZP/A','MQ7D2ZP/A','MQ6J2ZP/A','MQ7E2ZP/A','MQ6G2ZP/A', 'MQ7C2ZP/A']
+	}}
 
 	
-	Us =[
-		#IphoneXr
+	Us ={
+		'IphoneXr':[
 		'MT3L2LL/A', 'MT3U2LL/A','MT412LL/A','MT3K2LL/A','MT3T2LL/A', 'MT402LL/A','MT3R2LL/A','MT3Y2LL/A', 'MT462LL/A',
-		'MT3N2LL/A','MT3W2LL/A','MT442LL/A', 'MT3Q2LL/A','MT3X2LL/A','MT452LL/A', 'MT3M2LL/A','MT3V2LL/A','MT422LL/A',
-		#IphoneXsMax
-		'MT5A2LL/A','MT5E2LL/A','MT5H2LL/A','MT592LL/A','MT5D2LL/A','MT5G2LL/A','MT5C2LL/A','MT5F2LL/A','MT5J2LL/A',
-		#IphoneXs
-		'MT952LL/A','MT982LL/A','MT9C2LL/A','MT942LL/A','MT972LL/A','MT9A2LL/A','MT962LL/A','MT992LL/A','MT9D2LL/A',
-		#Iphone8plus
-		'MQ8E2LL/A','MQ8H2LL/A','MQ8F2LL/A','MQ8J2LL/A','MQ8D2LL/A','MQ8G2LL/A',
-		#Iphone8
-		'MQ6L2LL/A', 'MQ7G2LL/A','MQ6M2LL/A', 'MQ7H2LL/A','MQ6K2LL/A','MQ7F2LL/A']
-		#IphoneX
-		# 'MQA62LL/A','MQA92LL/A','MQA52LL/A','MQA82LL/A']
+		'MT3N2LL/A','MT3W2LL/A','MT442LL/A', 'MT3Q2LL/A','MT3X2LL/A','MT452LL/A', 'MT3M2LL/A','MT3V2LL/A','MT422LL/A'],
 
+		'IphoneXs-Max':['MT5A2LL/A','MT5E2LL/A','MT5H2LL/A','MT592LL/A','MT5D2LL/A','MT5G2LL/A','MT5C2LL/A','MT5F2LL/A','MT5J2LL/A'],
+		'IphoneXs':['MT952LL/A','MT982LL/A','MT9C2LL/A','MT942LL/A','MT972LL/A','MT9A2LL/A','MT962LL/A','MT992LL/A','MT9D2LL/A'],
+		'Iphone8-plus':['MQ8E2LL/A','MQ8H2LL/A','MQ8F2LL/A','MQ8J2LL/A','MQ8D2LL/A','MQ8G2LL/A'],
+		'Iphone8':['MQ6L2LL/A', 'MQ7G2LL/A','MQ6M2LL/A', 'MQ7H2LL/A','MQ6K2LL/A','MQ7F2LL/A'],
+		'AppleWatch3':['MTEY2LL/A', 'MTGG2LL/A', 'MTF22LL/A', 'MTGR2LL/A'],
+		'AppleWatch4':['MU642LL/A',	'MU6A2LL/A','MTUD2LL/A','MTUU2LL/A']}
 
-	IphoneXr_us = ['MT3L2LL/A', 'MT3U2LL/A','MT412LL/A','MT3K2LL/A','MT3T2LL/A', 'MT402LL/A','MT3R2LL/A','MT3Y2LL/A', 'MT462LL/A','MT3N2LL/A',
-				'MT3W2LL/A','MT442LL/A', 'MT3Q2LL/A','MT3X2LL/A','MT452LL/A', 'MT3M2LL/A','MT3V2LL/A','MT422LL/A']
-	IphoneXs_us = ['MT952LL/A','MT982LL/A','MT9C2LL/A','MT942LL/A','MT972LL/A','MT9A2LL/A','MT962LL/A','MT992LL/A','MT9D2LL/A']
-	IphoneXs_Max_us = ['MT5A2LL/A','MT5E2LL/A','MT5H2LL/A','MT592LL/A','MT5D2LL/A','MT5G2LL/A','MT5C2LL/A','MT5F2LL/A','MT5J2LL/A']
-
-	Iphone8_us = ['MQ6L2LL/A', 'MQ7G2LL/A','MQ6M2LL/A', 'MQ7H2LL/A','MQ6K2LL/A','MQ7F2LL/A']
-	Iphone8plus_us = ['MQ8E2LL/A','MQ8H2LL/A','MQ8F2LL/A','MQ8J2LL/A','MQ8D2LL/A','MQ8G2LL/A']
-	# IphoneX_us = ['MQA62LL/A','MQA92LL/A','MQA52LL/A','MQA82LL/A']
-
+	Product_Us_R = {k: key for key, value in Us.items() for k in value}
 
 	#---------------------------------------------------------------- Color-----------------------------------------------------------#
-
-	Silver = ['MQ8E2', 'MQ9E2', 'MQ972', 'MQ8H2', 'MQ9A2', 'MQ9H2', 'MQ8M2', 'MQ8U2', 'MQ912', 'MQ8Q2', 'MQ8X2', 'MQ942','MQ9L2','MQ9P2',
+	Color = {
+	'Silver' : ['MQ8E2', 'MQ9E2', 'MQ972', 'MQ8H2', 'MQ9A2', 'MQ9H2', 'MQ8M2', 'MQ8U2', 'MQ912', 'MQ8Q2', 'MQ8X2', 'MQ942','MQ9L2','MQ9P2',
 			'MQAK2', 'MQAR2', 'MQAD2', 'MQAN2', 'MQAV2', 'MQAG2', 'MQCT2', 'MQCL2', 'MQAY2', 'MQA62','MQCW2', 'MQCP2', 'MQC22', 'MQA92',
 			#iphone8
 			'MQ6H2', 'MQ6W2', 'MQ702','MQ7D2', 'MQ7R2', 'MQ7V2','MQ6L2', 'MQ732', 'MQ762','MQ7G2', 'MQ7Y2', 'MQ822','MQ792','MQ852',
 			#iphoneXs
 			'MT952','MT982','MT9C2','MT9F2','MT9J2','MT9M2','MT9Q2','MT9U2','MT9X2','MTAX2','MTE12','MTE42',
 			#iphoneXsMax
-			'MT512','MT542','MT572','MT5A2','MT5E2','MT5H2','MT6R2','MT6V2','MT6Y2','MT722','MT752','MT782']
+			'MT512','MT542','MT572','MT5A2','MT5E2','MT5H2','MT6R2','MT6V2','MT6Y2','MT722','MT752','MT782'],
 
-	Gold = ['MQ8F2', 'MQ9F2', 'MQ982','MQ8J2', 'MQ9C2', 'MQ9J2', 'MQ8N2', 'MQ8V2', 'MQ922','MQ8R2', 'MQ8Y2', 'MQ952','MQ9M2','MQ9Q2',
+
+	'Gold' : ['MQ8F2', 'MQ9F2', 'MQ982','MQ8J2', 'MQ9C2', 'MQ9J2', 'MQ8N2', 'MQ8V2', 'MQ922','MQ8R2', 'MQ8Y2', 'MQ952','MQ9M2','MQ9Q2',
 			#iphone8
 			'MQ6M2', 'MQ742', 'MQ772', 'MQ7H2', 'MQ802', 'MQ832', 'MQ6J2', 'MQ6X2', 'MQ712', 'MQ7E2', 'MQ7T2', 'MQ7W2','MQ7A2','MQ862',
 			#iphoneXs
 			'MT962','MT992','MT9D2','MT9G2','MT9K2','MT9N2','MT9R2','MT9V2','MT9Y2','MTAY2','MTE22','MTE52',
 			#iphoneXsMax
-			'MT522','MT552','MT5F2','MT582','MT5C2','MT6W2','MT5J2','MT6T2','MT762','MT702','MT732','MT792']
+			'MT522','MT552','MT5F2','MT582','MT5C2','MT6W2','MT5J2','MT6T2','MT762','MT702','MT732','MT792'],
 
-	Gray = ['MQ8D2', 'MQ9D2', 'MQ962', 'MQ8G2', 'MQ9G2', 'MQ992', 'MQ8L2', 'MQ8T2', 'MQ902', 'MQ8P2', 'MQ8W2', 'MQ932','MQ9K2','MQ9N2',
+	'Gray' : ['MQ8D2', 'MQ9D2', 'MQ962', 'MQ8G2', 'MQ9G2', 'MQ992', 'MQ8L2', 'MQ8T2', 'MQ902', 'MQ8P2', 'MQ8W2', 'MQ932','MQ9K2','MQ9N2',
 			'MQAJ2', 'MQAQ2', 'MQAC2', 'MQAM2', 'MQAU2', 'MQAF2','MQCR2', 'MQCK2', 'MQAX2', 'MQA52','MQCV2', 'MQCN2', 'MQC12', 'MQA82',
 			#iphone8
 			'MQ6K2','MQ722','MQ752','MQ7F2','MQ7X2','MQ812','MQ6G2','MQ6V2', 'MQ6Y2','MQ7C2','MQ7Q2','MQ7U2','MQ782','MQ842',
 			#iphoneXs
 			'MT942','MT972','MT9A2','MT9E2','MT9H2','MT9L2','MT9P2','MT9T2','MT9W2','MTAW2','MTE02','MTE32',
 			#iphoneXsMax
-			'MT502','MT532','MT562','MT592','MT5D2','MT5G2','MT6Q2','MT6U2','MT6X2','MT712','MT742','MT772']
+			'MT502','MT532','MT562','MT592','MT5D2','MT5G2','MT6Q2','MT6U2','MT6X2','MT712','MT742','MT772'],
 
-	Red = ['MRTG2', 'MRTJ2', 'MRT72', 'MRTH2', 'MRTK2', 'MRT82', 'MRTC2', 'MRTE2', 'MRT92', 'MRTA2', 'MRTD2', 'MRTF2','MRTL2','MRTM2',
+	'Red' : ['MRTG2', 'MRTJ2', 'MRT72', 'MRTH2', 'MRTK2', 'MRT82', 'MRTC2', 'MRTE2', 'MRT92', 'MRTA2', 'MRTD2', 'MRTF2','MRTL2','MRTM2',
 			#iphone8
 			'MRRK2', 'MRRR2', 'MRRT2', 'MRRL2', 'MRRW2', 'MRRX2', 'MRRM2', 'MRRP2', 'MRRQ2', 'MRRN2', 'MRRU2', 'MRRV2',
 			#iphoneXr
-			 'MT3M2','MT3V2','MT422','MRY62','MRYE2','MRYM2','MT142','MT1D2','MT1L2','MT062','MT0N2','MT0X2']
+			 'MT3M2','MT3V2','MT422','MRY62','MRYE2','MRYM2','MT142','MT1D2','MT1L2','MT062','MT0N2','MT0X2'],
 
-	White = [#iphoneXr
-			'MT3L2', 'MT3U2','MT412','MRY52', 'MRYD2', 'MRYL2', 'MT132', 'MT1A2', 'MT1J2', 'MT032', 'MT0J2', 'MT0W2']
+	'White' : [#iphoneXr
+			'MT3L2', 'MT3U2','MT412','MRY52', 'MRYD2', 'MRYL2', 'MT132', 'MT1A2', 'MT1J2', 'MT032', 'MT0J2', 'MT0W2'],
 
-	Black = [#iphoneXr
-			'MT3K2','MT3T2', 'MT402','MRY42','MRY92', 'MRYJ2','MT122','MT192', 'MT1H2','MT002','MT0G2', 'MT0V2']
+	'Black' : [#iphoneXr
+			'MT3K2','MT3T2', 'MT402','MRY42','MRY92', 'MRYJ2','MT122','MT192', 'MT1H2','MT002','MT0G2', 'MT0V2'],
 
-	Blue = [#iphoneXr
-			'MT3R2','MT3Y2', 'MT462','MRYA2','MRYH2', 'MRYQ2','MT182','MT1G2', 'MT1Q2','MT0E2','MT0U2', 'MT112']
+	'Blue' : [#iphoneXr
+			'MT3R2','MT3Y2', 'MT462','MRYA2','MRYH2', 'MRYQ2','MT182','MT1G2', 'MT1Q2','MT0E2','MT0U2', 'MT112'],
 
-	Yellow = [#iphoneXr 
-			'MT3N2','MT3W2','MT442', 'MRY72','MRYF2','MRYN2','MT162','MT1E2','MT1M2','MT082','MT0Q2','MT0Y2']
+	'Yellow' : [#iphoneXr 
+			'MT3N2','MT3W2','MT442', 'MRY72','MRYF2','MRYN2','MT162','MT1E2','MT1M2','MT082','MT0Q2','MT0Y2'],
 
-	Coral = [#iphoneXr
-			'MT3Q2','MT3X2','MT452','MRY82','MRYG2','MRYP2','MT172','MT1F2','MT1P2','MT0A2','MT0T2','MT102']
+	'Coral' : [#iphoneXr
+			'MT3Q2','MT3X2','MT452','MRY82','MRYG2','MRYP2','MT172','MT1F2','MT1P2','MT0A2','MT0T2','MT102'],
+
+	
+	'GPS' : [# Iphone Watch 3
+			'MTEY2', 'MTF22',
+			# Iphone Watch 4
+			'MU642','MU6A2'],
+
+	'GPSCelluar' :[# Iphone Watch 3
+				'MTGG2', 'MTGN2', 'MTGK2','MTGR2','MTGX2','MTH12',
+				# Iphone Watch 4
+				'MTUD2','MTUU2','MTVA2','MTVR2']}
 
 
+
+	Color_R = {k: key for key, value in Color.items() for k in value}
 	#---------------------------------------------------------------- SIZE -------------------------------------------------------------#
-
-	Size_SixFour = [
+	Size = {
+	'64GB' : [
 				'MQ8F2', 'MQ9F2', 'MQ982', 'MQ8E2', 'MQ9E2', 'MQ972', 'MQ8D2', 'MQ9D2', 'MQ962', 'MRTG2', 'MRTJ2', 'MRT72',
 				'MQ8N2', 'MQ8V2', 'MQ922', 'MQ8M2', 'MQ8U2', 'MQ912', 'MQ8L2', 'MQ8T2', 'MQ902', 'MRTC2', 'MRTE2', 'MRT92',
 				'MQ9L2', 'MQ9M2', 'MQ9K2', 'MRTL2', 'MQAK2', 'MQAR2', 'MQAD2', 'MQCT2', 'MQCL2', 'MQAY2', 'MQA62', 'MQCR2',
@@ -270,110 +289,88 @@ def Update():
 				'MT942','MT952','MT962','MT9E2','MT9F2','MT9G2','MT9P2','MT9Q2','MT9R2','MTAW2','MTAX2','MTAY2',
 
 				#IphoneXsMax
-				'MT502','MT512','MT522','MT592','MT5A2','MT5C2','MT6Q2','MT6R2','MT6T2','MT712','MT722','MT732']
+				'MT502','MT512','MT522','MT592','MT5A2','MT5C2','MT6Q2','MT6R2','MT6T2','MT712','MT722','MT732'],
 
-	Size_OneTwoEight = [
+	'128GB' : [
 				#IphonXr
 				'MRYD2','MRY92','MRYH2','MRYF2','MRYG2','MRYE2','MT1A2','MT192','MT1G2','MT1E2','MT1F2','MT1D2', 'MT0J2','MT0G2','MT0U2',
-				'MT0Q2','MT0T2','MT0N2','MT3U2','MT3T2','MT3Y2','MT3W2','MT3X2','MT3V2']
+				'MT0Q2','MT0T2','MT0N2','MT3U2','MT3T2','MT3Y2','MT3W2','MT3X2','MT3V2'],
 
 					
-	Size_TwoFiveSix = [
+	'256GB' : [
 					#Iphone8 
 					'MQ7H2', 'MQ802', 'MQ832','MQ7G2', 'MQ7Y2', 'MQ822','MQ7F2', 'MQ7X2', 'MQ812','MRRL2', 'MRRW2', 'MRRX2','MQ7E2',
 					'MQ7T2', 'MQ7W2','MQ7D2', 'MQ7R2', 'MQ7V2',	'MQ7C2', 'MQ7Q2', 'MQ7U2','MRRN2', 'MRRU2', 'MRRV2',
 					#Iphone8plus
 					'MQ8J2', 'MQ9C2', 'MQ9J2','MQ8H2', 'MQ9A2', 'MQ9H2','MQ8G2', 'MQ9G2', 'MQ992','MRTH2', 'MRTK2', 'MRT82','MQ8R2', 'MQ8Y2',
-					'MQ952','MQ8Q2', 'MQ8X2', 'MQ942','MQ8P2', 'MQ8W2', 'MQ932','MRTA2', 'MRTD2', 'MRTF2','MQ852','MQ862','MQ842',
+					'MQ952','MQ8Q2', 'MQ8X2', 'MQ942','MQ8P2', 'MQ8W2', 'MQ932','MRTA2', 'MRTD2', 'MRTF2','MQ852','MQ862','MQ842','MQ9P2',
+					'MQ9Q2','MQ9N2',
 					#IphoneXr
 					'MRYL2','MRYJ2','MRYQ2','MRYN2','MRYP2','MRYM2','MT1J2','MT1H2','MT1Q2','MT1M2','MT1P2','MT1L2','MT0W2','MT0V2',
 					'MT112','MT0Y2','MT102','MT0X2','MT412', 'MT402', 'MT462','MT442', 'MT452','MT422',
 					#IphoneXs
 					'MT972','MT982','MT992','MT9H2','MT9J2','MT9K2','MT9T2','MT9U2','MT9V2','MTE02','MTE12','MTE22',
 					#IphoneXsMax
-					'MT532','MT542','MT552','MT5D2','MT5E2','MT5F2','MT6U2','MT6V2','MT6W2','MT742','MT752','MT762']
+					'MT532','MT542','MT552','MT5D2','MT5E2','MT5F2','MT6U2','MT6V2','MT6W2','MT742','MT752','MT762'],
 
+	'512GB' : [
+					#IphoneXs
+					'MT9A2','MT9C2','MT9D2','MT9L2','MT9M2','MT9N2','MT9W2','MT9X2','MT9Y2','MTE32','MTE42','MTE52',
+					#IphoneXsMax
+					'MT562','MT572','MT582','MT5G2','MT5H2','MT5J2','MT6X2','MT6Y2','MT702','MT772','MT782','MT792'],
 
+	#IphoneWatch3
+	'38mm': ['MTEY2','MTGG2','MTGN2','MTGK2'],
+	'42mm': ['MTF22','MTGR2','MTH12','MTGX2'],
+	#IphoneWatch4
+	'40mm': ['MTUD2','MTVA2','MU642'],
+	'44mm': ['MTUU2','MTVR2','MU6A2']}
+	#為了方便接下來 不同的 model 進行 Size 的對應 這裡將 key(size) 跟 value(model) 進行對調 變成 Key 為 model value 為 size 
+	# eg:'MQ8F2':'Size_SixFour'
+
+	Size_R = {k: key for key, value in Size.items() for k in value}
+	# for key, value in size.items
+	# 	for k in value
+	# 		k: key
 	#---------------------拿到所有 iphone 分 不同產品的 model 的型號--------------------------#
 
-	# 拿到所有的 國家 的 value，但此時所有的value 會形成兩層的list 要把這兩層的list解開
-	mylist = [v for v in countries['Iphone8plus'].values()]
-	# 把list 展開成一層
-	Iphone8plus = [newlist for sublist in mylist for newlist in sublist]
+	# 除了US以外 其他所有國家以 [產品] 為 key 對應到所有的 value [型號]
+	# "{}".format(Product_item) 會產生變數名稱 , eg:{'Iphone8':'MQ6H2TA/A'}
+	Product = {}
+	for Product_item in countries.keys():
+		Product["{}".format(Product_item)]= sum([v for v in countries[Product_item].values()], [])
 
-	mylist = [v for v in countries['Iphone8'].values()]
-	# 把list 展開成一層
-	Iphone8 = [newlist for sublist in mylist for newlist in sublist]
+	Product_R = {k: key for key, value in Product.items() for k in value}
+ 
+	#拿到所有以[國家] 為 key 對應到所有的 [型號]
+	Country = {}
+	for v in countries.values():
+	  for k in v.keys():
+	    Country.setdefault(k,[]) # added key
+	    Country[k] += v[k]
 
-	mylist = [v for v in countries['IphoneXr'].values()]
-	# 把list 展開成一層
-	IphoneXr = [newlist for sublist in mylist for newlist in sublist]
+	# print(Country)
 
-	mylist = [v for v in countries['IphoneXs'].values()]
-	# 把list 展開成一層
-	IphoneXs = [newlist for sublist in mylist for newlist in sublist]
+	#以[型號] 為 key 對應到所有的 [國家]
+	Country_R = {k: key for key, value in Country.items() for k in value}
 
-	mylist = [v for v in countries['IphoneXsMax'].values()]
-	# 把list 展開成一層
-	IphoneXs_Max = [newlist for sublist in mylist for newlist in sublist]
-
-	# IphoneXr = []
-	# Iphone8plus=[]
-	# Iphone8=[]
-	# IphoneXs = []
-	# mylist = [v for v in countries['IphoneX'].values()]
-	# # 把list 展開成一層
-	# IphoneX = [newlist for sublist in mylist for newlist in sublist]
-
+	# 除了US以外所有的 [型號] 併在一起 , 給for迴圈使用
+	Model_All = sum(list(Product.values()),[])
+	# 把US所有的 [型號] 併再一起 , 給for迴圈使用
+	Model_Us = sum(list(Us.values()),[])
 
 	res=[]
 
-	#美國的要單獨跑 因為地址網址的dictionary 是空的
-	for Model in Us:
+	# 美國的要單獨跑 因為地址網址的dictionary 是空的
+	for Model in Model_Us:
+		# print(Model)
 		d = {} #清空dictionary
 		d['Country'] = 'Us'
 		d['TimeStemp'] = datetime.datetime.today().strftime("%Y-%m-%d")
 
-		#Different Size
-
-		if Model[0:5] in Size_SixFour :
-			d['Size'] = '64GB'
-		elif Model[0:5] in Size_OneTwoEight :
-			d['Size'] = '128GB'
-		elif Model[0:5] in Size_TwoFiveSix :
-			d['Size'] = '256GB'
-		else:
-			d['Size'] = '512GB'
-
-		if Model in IphoneXs_us:
-			d['Product'] = 'IphoneXs'
-		elif Model in IphoneXs_Max_us:
-			d['Product'] = 'IphoneXs-Max'
-		elif Model in IphoneXr_us:
-			d['Product'] = 'IphoneXr'
-		elif Model in Iphone8plus_us:
-			d['Product'] = 'Iphone8-plus'
-		elif Model in Iphone8_us:
-			d['Product'] = 'Iphone8'
-
-		if Model[0:5] in Silver:
-			d['Color'] = 'Silver'
-		elif Model[0:5] in Gold:
-			d['Color'] = 'Gold'
-		elif Model[0:5] in Gray:
-			d['Color'] = 'Gray'
-		elif Model[0:5] in Red:
-			d['Color'] = 'Red'
-		elif Model[0:5] in White:
-			d['Color'] = 'White'
-		elif Model[0:5] in Black:
-			d['Color'] = 'Black'
-		elif Model[0:5] in Blue:
-			d['Color'] = 'Blue'
-		elif Model[0:5] in Yellow:
-			d['Color'] = 'Yellow'
-		elif Model[0:5] in Coral:
-			d['Color'] = 'Coral'
+		d['Size'] = Size_R[Model[0:5]]
+		d['Product'] = Product_Us_R[Model]
+		d['Color'] = Color_R[Model[0:5]]
 
 		url = 'https://www.apple.com/shop/delivery-message?parts.0=%s&little=true' % ( Model )
 		r = requests.get(url)
@@ -381,60 +378,23 @@ def Update():
 		d['Deliver'] = response['body']['content']['deliveryMessage'][Model]['quote']
 		res.append(d)
 
-	#%%
-	#最外迴圈跑產品別
+
 	for Product in countries:
 		#外迴圈跑國家
 		for Country in countries[Product]:
 			#內迴圈跑型號
 			for Model in countries[Product][Country]:
+
 				d = {} #清空dictionary
 				d['Country'] = Country
 				d['TimeStemp'] = datetime.datetime.today().strftime("%Y-%m-%d")
-
-				#Size
-				if Model[0:5] in Size_SixFour:
-					d['Size'] = '64GB'
-				elif Model[0:5] in Size_OneTwoEight:
-					d['Size'] = '128GB'
-				elif Model[0:5] in Size_TwoFiveSix:
-					d['Size'] = '256GB'
-				else:
-					d['Size'] = '512GB'
-
-				if Model in IphoneXs:
-					d['Product'] = 'IphoneXs'
-				elif Model in IphoneXs_Max:
-					d['Product'] = 'IphoneXs-Max'
-				elif Model in IphoneXr:
-					d['Product'] = 'IphoneXr'
-				elif Model in Iphone8plus:
-					d['Product'] = 'Iphone8-plus'
-				elif Model in Iphone8:
-					d['Product'] = 'Iphone8'
-
-				if Model[0:5] in Silver:
-					d['Color'] = 'Silver'
-				elif Model[0:5] in Gold:
-					d['Color'] = 'Gold'
-				elif Model[0:5] in Gray:
-					d['Color'] = 'Gray'
-				elif Model[0:5] in Red:
-					d['Color'] = 'Red'
-				elif Model[0:5] in White:
-					d['Color'] = 'White'
-				elif Model[0:5] in Black:
-					d['Color'] = 'Black'
-				elif Model[0:5] in Blue:
-					d['Color'] = 'Blue'
-				elif Model[0:5] in Yellow:
-					d['Color'] = 'Yellow'
-				elif Model[0:5] in Coral:
-					d['Color'] = 'Coral'
+				d['Size'] = Size_R[Model[0:5]]
+				d['Product'] = Product_R[Model]
+				d['Color'] = Color_R[Model[0:5]]
 
 
 				#單獨擷取一個產品
-				url = 'https://www.apple.com/%s/shop/delivery-message?parts.0=%s&little=true' % (Country.lower(), Model)
+				url = 'https://www.apple.com/%s/shop/delivery-message?parts.0=%s&little=true' % (d['Country'].lower(), Model)
 				r = requests.get(url)
 				response = json.loads(r.text)
 				#try:
@@ -480,7 +440,7 @@ def dashboard():
 	#只把我們要的 product 拿出來
 	df = df[df['Product']==Product]
 
-	#想辦法把該產品的Size catagories 取出來成為一個陣列
+	#把Size裡的項目轉成類別等等進行pivot就會排好
 	Product_Categories = df['Size'].unique().tolist()
 	df["Size"] = df["Size"].astype('category', categories=Product_Categories)
 
@@ -489,77 +449,31 @@ def dashboard():
 
 	#---------------------     協理要的國家排序    ---------------------#
 	cols = ['美國','中國','香港','台灣','日本','德國','法國','新加坡','俄羅斯']
-	cols2 = ['64GB','256GB','512GB']
+	cols2 = ['美國','中國','香港','日本','德國','法國','新加坡','俄羅斯']
 	try:
 		pivot = pivot[cols]
-
+	except:
+		pivot = pivot[cols2]
 	finally:
 	#df_fill_country會把篩選過後的表格輸出
-		df_fill_country = df[df['Country']==Country]
-		df_fill_country = pd.pivot_table(df_fill_country, values='Deliver', index=Index,
-		    columns=['All_countries','Color','Size'], aggfunc=lambda x: ' '.join(x)).sort_index(ascending=False)
 
-		#--------------------- 分產品 返回不同的網頁 --------------------------#
 
-		# if Product == 'IphoneX':
-		# # 如果 Country 不是空的就把全部都秀出來
-		# 	if not Country :
-		# 		return render_template("IphoneX.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-		# 			Title = 'Overview',Product = Product)
+	#---------------------  返回網頁 --------------------------#
+		if not Country:
+			Title = 'Overview'
+			Table = pivot
+			Country = None
 
-		# 	country_title = All_countries_E[Country]
-		# 	return render_template("IphoneX.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-		# 		Title = country_title, Country=Country, Product = Product)
+		else:
+			df_fill_country = df[df['Country']==Country]
+			df_fill_country = pd.pivot_table(df_fill_country, values='Deliver', index=Index,
+			    columns=['All_countries','Color','Size'], aggfunc=lambda x: ' '.join(x)).sort_index(ascending=False)
 
-		if Product == 'Iphone8-plus':
+			Table = df_fill_country
+			Title = All_countries_E[Country]
 
-			if not Country :
-				return render_template("Iphone8plus.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-					Title = 'Overview',Product = Product)
-
-			country_title = All_countries_E[Country]
-			return render_template("Iphone8plus.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-				Title = country_title, Country=Country, Product = Product)
-
-		if Product == 'Iphone8':
-
-			if not Country :
-				return render_template("Iphone8.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-					Title = 'Overview',Product = Product)
-
-			country_title = All_countries_E[Country]
-			return render_template("Iphone8.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-				Title = country_title, Country=Country, Product = Product)
-
-		elif Product == 'IphoneXr':
-
-			if not Country :
-				return render_template("IphoneXr.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-					Title = 'Overview',Product = Product)
-				
-			country_title = All_countries_E[Country]
-			return render_template("IphoneXr.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-				Title = country_title, Country=Country, Product = Product)
-
-		elif Product == 'IphoneXs':
-
-			if not Country :
-				return render_template("IphoneXs.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-					Title = 'Overview',Product = Product)
-				
-			country_title = All_countries_E[Country]
-			return render_template("IphoneXs.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-				Title = country_title, Country=Country, Product = Product)
-
-		elif Product == 'IphoneXs-Max':
-
-			if not Country :
-				return render_template("IphoneXs-Max.html", table = pivot.to_html(classes = "table table-striped table-hover"),
-					Title = 'Overview',Product = Product)
-				
-			country_title = All_countries_E[Country]
-			return render_template("IphoneXs-Max.html",table = df_fill_country.to_html(classes = "table table-striped table-hover"),
-				Title = country_title, Country=Country, Product = Product)	
+		return render_template("All.html",Table = Table.to_html(classes = "table table-striped table-hover"),
+				Title=Title, Country=Country, Product=Product)
 
 if __name__ == "__main__":
     app.secret_key='secret123'
