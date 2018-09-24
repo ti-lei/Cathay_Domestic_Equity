@@ -9,7 +9,8 @@ import os
 import shutil
 import datetime
 
-Data = pd.read_csv("Data.csv")
+path = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
+Data = pd.read_csv(path)
 Old_Data = Data.to_dict('records')
 
 countries = {
@@ -334,5 +335,5 @@ df = pd.DataFrame(newres)
 #index:列向量
 #columns:行向量
 
-df.to_csv('Data.csv',encoding='utf_8_sig', index=False)
+df.to_csv(path,encoding='utf_8_sig', index=False)
 print("ok")
