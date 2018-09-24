@@ -335,5 +335,4 @@ df = pd.DataFrame(newres)
 #columns:行向量
 
 df.to_csv('Data.csv',encoding='utf_8_sig', index=False)
-# return "true"
-printf("update ok")
+print("ok")
