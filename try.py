@@ -10,5 +10,5 @@ import shutil
 import datetime
 path = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
 Data = pd.read_csv(path)
-df.to_csv(path,encoding='utf_8_sig', index=False)
+Data.to_csv(path,encoding='utf_8_sig', index=False)
 print("ok")
