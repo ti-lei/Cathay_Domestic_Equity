@@ -336,4 +336,12 @@ df = pd.DataFrame(newres)
 #columns:行向量
 
 df.to_csv(path,encoding='utf_8_sig', index=False)
+
+
+#要去哪裡
+destname = "/home/ec2-user/Cathay_Domestic_Equity/static/Data.csv"
+#來源資料
+fromname = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
+shutil.copy2(fromname, destname)
+
 print("ok")
