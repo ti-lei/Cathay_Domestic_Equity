@@ -8,144 +8,110 @@ import pandas as pd
 import os
 import shutil
 import datetime
-import pymysql.cursors
+
+path = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
+Data = pd.read_csv(path)
+Old_Data = Data.to_dict('records')
+
+countries = {
+'AppleWatch4':{
+'Cn': ['MU642CH/A','MTVA2CH/A','MU6A2CH/A','MTVR2CH/A'],
+'Jp': ['MU642J/A','MU6A2J/A','MTVA2J/A','MTVR2J/A'],
+'Hk': ['MU642ZP/A','MU6A2ZP/A','MTVA2ZP/A','MTVR2ZP/A'],
+'Uk': ['MU642B/A','MU6A2B/A','MTVA2B/A','MTVR2B/A'],
+'De': ['MU642FD/A','MU6A2FD/A','MTVA2FD/A','MTVR2FD/A'],
+'Ru': ['MU642RU/A','MU6A2RU/A'], #38.42 GPS
+'Fr': ['MU642NF/A','MU6A2NF/A','MTVA2NF/A','MTVR2NF/A'],
+'Sg': ['MU642ZA/A','MU6A2ZA/A','MTVA2ZA/A','MTVR2ZA/A']
+},
 
 
-from sshtunnel import SSHTunnelForwarder
-from os.path import expanduser
-import paramiko
-from paramiko import SSHClient
-mypkey = paramiko.RSAKey.from_private_key_file('C:\\Users\\user\\Desktop\\Layx_Tokyo.pem')
-# if you want to use ssh password use - ssh_password='your ssh password', bellow
+'AppleWatch3':{
+'Tw': ['MTEY2TA/A','MTGN2TA/A', 'MTF22TA/A', 'MTH12TA/A'],
+'Cn': ['MTEY2CH/A','MTGK2CH/A','MTF22CH/A','MTGX2CH/A'],
+'Jp': ['MTEY2J/A', 'MTGN2J/A','MTF22J/A','MTH12J/A'],
+'Hk': ['MTEY2ZP/A', 'MTGN2ZP/A', 'MTF22ZP/A','MTH12ZP/A'],
+'Uk': ['MTEY2B/A','MTGN2B/A','MTF22B/A','MTH12B/A'],
+'De': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
+'Ru': ['MTEY2RU/A','MTF22RU/A'], #38.42 GPS
+'Fr': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
+'Sg': ['MTEY2ZP/A','MTGN2ZP/A','MTF22ZP/A','MTH12ZP/A']
+},
 
-sql_hostname = 'mytestdb.c72ftrj7ifc7.ap-northeast-1.rds.amazonaws.com'
-sql_username = 'root'
-sql_password = 'lay911225'
-sql_main_database = 'Appleinfo'
-sql_port = 3306
-ssh_host = 'ec2-13-114-122-68.ap-northeast-1.compute.amazonaws.com'
-ssh_user = 'ec2-user'
-ssh_port = 22
-sql_ip = '1.1.1.1.1'
+'IphoneXs-Max':{
+'Tw':['MT512TA/A','MT542TA/A','MT572TA/A','MT502TA/A','MT532TA/A','MT562TA/A','MT522TA/A','MT552TA/A','MT582TA/A'],
+'Cn':['MT722CH/A','MT752CH/A','MT782CH/A','MT712CH/A','MT742CH/A','MT772CH/A','MT732CH/A','MT762CH/A','MT792CH/A'],
+'Jp':['MT6R2J/A','MT6V2J/A','MT6Y2J/A','MT6Q2J/A','MT6U2J/A','MT6X2J/A','MT6T2J/A','MT6W2J/A','MT702J/A'],
+'Hk':['MT722ZA/A','MT752ZA/A','MT782ZA/A','MT712ZA/A','MT742ZA/A','MT772ZA/A','MT732ZA/A','MT762ZA/A','MT792ZA/A'],
+'Uk':['MT512B/A','MT542B/A','MT572B/A','MT502B/A','MT532B/A','MT562B/A','MT522B/A','MT552B/A','MT582B/A'],
+'De':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
+'Ru':['MT512RU/A','MT542RU/A','MT572RU/A','MT502RU/A','MT532RU/A','MT562RU/A','MT522RU/A','MT552RU/A','MT582RU/A'],
+'Fr':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
+'Sg':['MT512ZP/A','MT542ZP/A','MT572ZP/A','MT502ZP/A','MT532ZP/A','MT562ZP/A','MT522ZP/A','MT552ZP/A','MT582ZP/A']},
 
+'IphoneXs':{
+'Tw':['MT9F2TA/A','MT9J2TA/A','MT9M2TA/A','MT9E2TA/A','MT9H2TA/A','MT9L2TA/A','MT9G2TA/A','MT9K2TA/A','MT9N2TA/A'],
+'Cn':['MT9Q2CH/A','MT9U2CH/A','MT9X2CH/A','MT9P2CH/A','MT9T2CH/A','MT9W2CH/A','MT9R2CH/A','MT9V2CH/A','MT9Y2CH/A'],
+'Jp':['MTAX2J/A','MTE12J/A','MTE42J/A','MTAW2J/A','MTE02J/A','MTE32J/A','MTAY2J/A','MTE22J/A','MTE52J/A'],
+'Hk':['MT952ZA/A','MT982ZA/A','MT9C2ZA/A','MT942ZA/A','MT972ZA/A','MT9A2ZA/A','MT962ZA/A','MT992ZA/A','MT9D2ZA/A'],
+'Uk':['MT9F2B/A','MT9J2B/A','MT9M2B/A','MT9E2B/A','MT9H2B/A','MT9L2B/A','MT9G2B/A','MT9K2B/A','MT9N2B/A'],
+'De':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A'],
+'Ru':['MT9F2RU/A','MT9J2RU/A','MT9M2RU/A','MT9E2RU/A','MT9H2RU/A','MT9L2RU/A','MT9G2RU/A','MT9K2RU/A','MT9N2RU/A'],
+'Fr':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A'],
+'Sg':['MT9F2ZP/A','MT9J2ZP/A','MT9M2ZP/A','MT9E2ZP/A','MT9H2ZP/A','MT9L2ZP/A','MT9G2ZP/A','MT9K2ZP/A','MT9N2ZP/A']},
 
-    # query = '''SELECT VERSION();'''
-    # data = pd.read_sql_query(query, conn)
-    # conn.close()
+'IphoneXr':{
+'Tw': ['MRY52TA/A', 'MRYD2TA/A','MRYL2TA/A','MRY42TA/A','MRY92TA/A', 'MRYJ2TA/A','MRYA2TA/A','MRYH2TA/A',
+	'MRYQ2TA/A','MRY72TA/A','MRYF2TA/A','MRYN2TA/A', 'MRY82TA/A','MRYG2TA/A','MRYP2TA/A', 'MRY62TA/A','MRYE2TA/A','MRYM2TA/A'],
 
+'Cn': ['MT132CH/A', 'MT1A2CH/A','MT1J2CH/A','MT122CH/A','MT192CH/A', 'MT1H2CH/A','MT182CH/A','MT1G2CH/A', 
+	'MT1Q2CH/A','MT162CH/A','MT1E2CH/A','MT1M2CH/A', 'MT172CH/A','MT1F2CH/A','MT1P2CH/A' ,'MT142CH/A','MT1D2CH/A','MT1L2CH/A'],
 
-# connection = pymysql.connect(host='mytestdb.c72ftrj7ifc7.ap-northeast-1.rds.amazonaws.com',
-#                              user='root',
-#                              password='lay911225',
-#                              db='TEST',
-#                              charset='utf8',
-#                              cursorclass=pymysql.cursors.DictCursor,
-#                              autocommit=True)
+'Jp': ['MT032J/A', 'MT0J2J/A','MT0W2J/A','MT002J/A','MT0G2J/A', 'MT0V2J/A','MT0E2J/A','MT0U2J/A', 'MT112J/A',
+'MT082J/A','MT0Q2J/A','MT0Y2J/A', 'MT0A2J/A','MT0T2J/A','MT102J/A', 'MT062J/A','MT0N2J/A','MT0X2J/A'],
 
+'Hk': ['MT132ZA/A', 'MT1A2ZA/A','MT1J2ZA/A','MT122ZA/A','MT192ZA/A', 'MT1H2ZA/A','MT182ZA/A','MT1G2ZA/A',
+ 'MT1Q2ZA/A','MT162ZA/A','MT1E2ZA/A','MT1M2ZA/A', 'MT172ZA/A','MT1F2ZA/A','MT1P2ZA/A', 'MT142ZA/A','MT1D2ZA/A','MT1L2ZA/A'],
 
-# path = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
-# Data = pd.read_csv(path)
-# Old_Data = Data.to_dict('records')
+'Uk': ['MRY52B/A', 'MRYD2B/A','MRYL2B/A','MRY42B/A','MRY92B/A', 'MRYJ2B/A','MRYA2B/A','MRYH2B/A', 'MRYQ2B/A',
+'MRY72B/A','MRYF2B/A','MRYN2B/A', 'MRY82B/A','MRYG2B/A','MRYP2B/A', 'MRY62B/A','MRYE2B/A','MRYM2B/A'],
 
-# countries = {
-# 'AppleWatch4':{
-# 'Cn': ['MU642CH/A','MTVA2CH/A','MU6A2CH/A','MTVR2CH/A'],
-# 'Jp': ['MU642J/A','MU6A2J/A','MTVA2J/A','MTVR2J/A'],
-# 'Hk': ['MU642ZP/A','MU6A2ZP/A','MTVA2ZP/A','MTVR2ZP/A'],
-# 'Uk': ['MU642B/A','MU6A2B/A','MTVA2B/A','MTVR2B/A'],
-# 'De': ['MU642FD/A','MU6A2FD/A','MTVA2FD/A','MTVR2FD/A'],
-# 'Ru': ['MU642RU/A','MU6A2RU/A'], #38.42 GPS
-# 'Fr': ['MU642NF/A','MU6A2NF/A','MTVA2NF/A','MTVR2NF/A'],
-# 'Sg': ['MU642ZA/A','MU6A2ZA/A','MTVA2ZA/A','MTVR2ZA/A']
-# },
+'De': ['MRY52ZD/A','MRYD2ZD/A','MRYL2ZD/A','MRY42ZD/A','MRY92ZD/A', 'MRYJ2ZD/A','MRYA2ZD/A','MRYH2ZD/A',
+ 'MRYQ2ZD/A','MRY72ZD/A','MRYF2ZD/A','MRYN2ZD/A', 'MRY82ZD/A','MRYG2ZD/A','MRYP2ZD/A', 'MRY62ZD/A','MRYE2ZD/A','MRYM2ZD/A'],
 
+'Ru': ['MRY52RU/A','MRYD2RU/A','MRYL2RU/A','MRY42RU/A','MRY92RU/A', 'MRYJ2RU/A','MRYA2RU/A','MRYH2RU/A',
+ 'MRYQ2RU/A','MRY72RU/A','MRYF2RU/A','MRYN2RU/A', 'MRY82RU/A','MRYG2RU/A','MRYP2RU/A', 'MRY62RU/A','MRYE2RU/A','MRYM2RU/A'],
 
-# 'AppleWatch3':{
-# 'Tw': ['MTEY2TA/A','MTGN2TA/A', 'MTF22TA/A', 'MTH12TA/A'],
-# 'Cn': ['MTEY2CH/A','MTGK2CH/A','MTF22CH/A','MTGX2CH/A'],
-# 'Jp': ['MTEY2J/A', 'MTGN2J/A','MTF22J/A','MTH12J/A'],
-# 'Hk': ['MTEY2ZP/A', 'MTGN2ZP/A', 'MTF22ZP/A','MTH12ZP/A'],
-# 'Uk': ['MTEY2B/A','MTGN2B/A','MTF22B/A','MTH12B/A'],
-# 'De': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
-# 'Ru': ['MTEY2RU/A','MTF22RU/A'], #38.42 GPS
-# 'Fr': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
-# 'Sg': ['MTEY2ZP/A','MTGN2ZP/A','MTF22ZP/A','MTH12ZP/A']
-# },
+'Fr': ['MRY52ZD/A','MRYD2ZD/A','MRYL2ZD/A','MRY42ZD/A','MRY92ZD/A', 'MRYJ2ZD/A','MRYA2ZD/A','MRYH2ZD/A',
+ 'MRYQ2ZD/A','MRY72ZD/A','MRYF2ZD/A','MRYN2ZD/A', 'MRY82ZD/A','MRYG2ZD/A','MRYP2ZD/A', 'MRY62ZD/A','MRYE2ZD/A','MRYM2ZD/A'],
 
-# 'IphoneXs-Max':{
-# 'Tw':['MT512TA/A','MT542TA/A','MT572TA/A','MT502TA/A','MT532TA/A','MT562TA/A','MT522TA/A','MT552TA/A','MT582TA/A'],
-# 'Cn':['MT722CH/A','MT752CH/A','MT782CH/A','MT712CH/A','MT742CH/A','MT772CH/A','MT732CH/A','MT762CH/A','MT792CH/A'],
-# 'Jp':['MT6R2J/A','MT6V2J/A','MT6Y2J/A','MT6Q2J/A','MT6U2J/A','MT6X2J/A','MT6T2J/A','MT6W2J/A','MT702J/A'],
-# 'Hk':['MT722ZA/A','MT752ZA/A','MT782ZA/A','MT712ZA/A','MT742ZA/A','MT772ZA/A','MT732ZA/A','MT762ZA/A','MT792ZA/A'],
-# 'Uk':['MT512B/A','MT542B/A','MT572B/A','MT502B/A','MT532B/A','MT562B/A','MT522B/A','MT552B/A','MT582B/A'],
-# 'De':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
-# 'Ru':['MT512RU/A','MT542RU/A','MT572RU/A','MT502RU/A','MT532RU/A','MT562RU/A','MT522RU/A','MT552RU/A','MT582RU/A'],
-# 'Fr':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
-# 'Sg':['MT512ZP/A','MT542ZP/A','MT572ZP/A','MT502ZP/A','MT532ZP/A','MT562ZP/A','MT522ZP/A','MT552ZP/A','MT582ZP/A']},
-
-# 'IphoneXs':{
-# 'Tw':['MT9F2TA/A','MT9J2TA/A','MT9M2TA/A','MT9E2TA/A','MT9H2TA/A','MT9L2TA/A','MT9G2TA/A','MT9K2TA/A','MT9N2TA/A'],
-# 'Cn':['MT9Q2CH/A','MT9U2CH/A','MT9X2CH/A','MT9P2CH/A','MT9T2CH/A','MT9W2CH/A','MT9R2CH/A','MT9V2CH/A','MT9Y2CH/A'],
-# 'Jp':['MTAX2J/A','MTE12J/A','MTE42J/A','MTAW2J/A','MTE02J/A','MTE32J/A','MTAY2J/A','MTE22J/A','MTE52J/A'],
-# 'Hk':['MT952ZA/A','MT982ZA/A','MT9C2ZA/A','MT942ZA/A','MT972ZA/A','MT9A2ZA/A','MT962ZA/A','MT992ZA/A','MT9D2ZA/A'],
-# 'Uk':['MT9F2B/A','MT9J2B/A','MT9M2B/A','MT9E2B/A','MT9H2B/A','MT9L2B/A','MT9G2B/A','MT9K2B/A','MT9N2B/A'],
-# 'De':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A'],
-# 'Ru':['MT9F2RU/A','MT9J2RU/A','MT9M2RU/A','MT9E2RU/A','MT9H2RU/A','MT9L2RU/A','MT9G2RU/A','MT9K2RU/A','MT9N2RU/A'],
-# 'Fr':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A'],
-# 'Sg':['MT9F2ZP/A','MT9J2ZP/A','MT9M2ZP/A','MT9E2ZP/A','MT9H2ZP/A','MT9L2ZP/A','MT9G2ZP/A','MT9K2ZP/A','MT9N2ZP/A']},
-
-# 'IphoneXr':{
-# 'Tw': ['MRY52TA/A', 'MRYD2TA/A','MRYL2TA/A','MRY42TA/A','MRY92TA/A', 'MRYJ2TA/A','MRYA2TA/A','MRYH2TA/A',
-# 	'MRYQ2TA/A','MRY72TA/A','MRYF2TA/A','MRYN2TA/A', 'MRY82TA/A','MRYG2TA/A','MRYP2TA/A', 'MRY62TA/A','MRYE2TA/A','MRYM2TA/A'],
-
-# 'Cn': ['MT132CH/A', 'MT1A2CH/A','MT1J2CH/A','MT122CH/A','MT192CH/A', 'MT1H2CH/A','MT182CH/A','MT1G2CH/A', 
-# 	'MT1Q2CH/A','MT162CH/A','MT1E2CH/A','MT1M2CH/A', 'MT172CH/A','MT1F2CH/A','MT1P2CH/A' ,'MT142CH/A','MT1D2CH/A','MT1L2CH/A'],
-
-# 'Jp': ['MT032J/A', 'MT0J2J/A','MT0W2J/A','MT002J/A','MT0G2J/A', 'MT0V2J/A','MT0E2J/A','MT0U2J/A', 'MT112J/A',
-# 'MT082J/A','MT0Q2J/A','MT0Y2J/A', 'MT0A2J/A','MT0T2J/A','MT102J/A', 'MT062J/A','MT0N2J/A','MT0X2J/A'],
-
-# 'Hk': ['MT132ZA/A', 'MT1A2ZA/A','MT1J2ZA/A','MT122ZA/A','MT192ZA/A', 'MT1H2ZA/A','MT182ZA/A','MT1G2ZA/A',
-#  'MT1Q2ZA/A','MT162ZA/A','MT1E2ZA/A','MT1M2ZA/A', 'MT172ZA/A','MT1F2ZA/A','MT1P2ZA/A', 'MT142ZA/A','MT1D2ZA/A','MT1L2ZA/A'],
-
-# 'Uk': ['MRY52B/A', 'MRYD2B/A','MRYL2B/A','MRY42B/A','MRY92B/A', 'MRYJ2B/A','MRYA2B/A','MRYH2B/A', 'MRYQ2B/A',
-# 'MRY72B/A','MRYF2B/A','MRYN2B/A', 'MRY82B/A','MRYG2B/A','MRYP2B/A', 'MRY62B/A','MRYE2B/A','MRYM2B/A'],
-
-# 'De': ['MRY52ZD/A','MRYD2ZD/A','MRYL2ZD/A','MRY42ZD/A','MRY92ZD/A', 'MRYJ2ZD/A','MRYA2ZD/A','MRYH2ZD/A',
-#  'MRYQ2ZD/A','MRY72ZD/A','MRYF2ZD/A','MRYN2ZD/A', 'MRY82ZD/A','MRYG2ZD/A','MRYP2ZD/A', 'MRY62ZD/A','MRYE2ZD/A','MRYM2ZD/A'],
-
-# 'Ru': ['MRY52RU/A','MRYD2RU/A','MRYL2RU/A','MRY42RU/A','MRY92RU/A', 'MRYJ2RU/A','MRYA2RU/A','MRYH2RU/A',
-#  'MRYQ2RU/A','MRY72RU/A','MRYF2RU/A','MRYN2RU/A', 'MRY82RU/A','MRYG2RU/A','MRYP2RU/A', 'MRY62RU/A','MRYE2RU/A','MRYM2RU/A'],
-
-# 'Fr': ['MRY52ZD/A','MRYD2ZD/A','MRYL2ZD/A','MRY42ZD/A','MRY92ZD/A', 'MRYJ2ZD/A','MRYA2ZD/A','MRYH2ZD/A',
-#  'MRYQ2ZD/A','MRY72ZD/A','MRYF2ZD/A','MRYN2ZD/A', 'MRY82ZD/A','MRYG2ZD/A','MRYP2ZD/A', 'MRY62ZD/A','MRYE2ZD/A','MRYM2ZD/A'],
-
-# 'Sg': ['MRY52ZP/A','MRYD2ZP/A','MRYL2ZP/A','MRY42ZP/A','MRY92ZP/A', 'MRYJ2ZP/A','MRYA2ZP/A','MRYH2ZP/A',
-#  'MRYQ2ZP/A','MRY72ZP/A','MRYF2ZP/A','MRYN2ZP/A', 'MRY82ZP/A','MRYG2ZP/A','MRYP2ZP/A', 'MRY62ZP/A','MRYE2ZP/A','MRYM2ZP/A']},
+'Sg': ['MRY52ZP/A','MRYD2ZP/A','MRYL2ZP/A','MRY42ZP/A','MRY92ZP/A', 'MRYJ2ZP/A','MRYA2ZP/A','MRYH2ZP/A',
+ 'MRYQ2ZP/A','MRY72ZP/A','MRYF2ZP/A','MRYN2ZP/A', 'MRY82ZP/A','MRYG2ZP/A','MRYP2ZP/A', 'MRY62ZP/A','MRYE2ZP/A','MRYM2ZP/A']},
 
 
-# 'Iphone8-plus':{
-# 'Tw': ['MQ8M2TA/A', 'MQ8Q2TA/A','MQ8L2TA/A','MQ8P2TA/A','MQ8N2TA/A', 'MQ8R2TA/A'],
-# 'Cn': ['MQ8E2CH/A','MQ8H2CH/A','MQ8F2CH/A','MQ8J2CH/A','MQ8D2CH/A','MQ8G2CH/A'],
-# 'Jp': ['MQ9L2J/A','MQ9P2J/A','MQ9M2J/A','MQ9Q2J/A','MQ9K2J/A','MQ9N2J/A'],
-# 'Hk': ['MQ8E2ZP/A','MQ8H2ZP/A','MQ8F2ZP/A','MQ8J2ZP/A','MQ8D2ZP/A','MQ8G2ZP/A'],
-# 'Uk': ['MQ8M2B/A','MQ8Q2B/A','MQ8N2B/A','MQ8R2B/A','MQ8L2B/A','MQ8P2B/A'],
-# 'De': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A'],
-# 'Ru': ['MQ8M2RU/A','MQ8Q2RU/A','MQ8N2RU/A','MQ8R2RU/A','MQ8L2RU/A','MQ8P2RU/A'],
-# 'Fr': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A'],
-# 'Sg': ['MQ8M2ZP/A','MQ8Q2ZP/A','MQ8N2ZP/A','MQ8R2ZP/A','MQ8L2ZP/A','MQ8P2ZP/A']},
+'Iphone8-plus':{
+'Tw': ['MQ8M2TA/A', 'MQ8Q2TA/A','MQ8L2TA/A','MQ8P2TA/A','MQ8N2TA/A', 'MQ8R2TA/A'],
+'Cn': ['MQ8E2CH/A','MQ8H2CH/A','MQ8F2CH/A','MQ8J2CH/A','MQ8D2CH/A','MQ8G2CH/A'],
+'Jp': ['MQ9L2J/A','MQ9P2J/A','MQ9M2J/A','MQ9Q2J/A','MQ9K2J/A','MQ9N2J/A'],
+'Hk': ['MQ8E2ZP/A','MQ8H2ZP/A','MQ8F2ZP/A','MQ8J2ZP/A','MQ8D2ZP/A','MQ8G2ZP/A'],
+'Uk': ['MQ8M2B/A','MQ8Q2B/A','MQ8N2B/A','MQ8R2B/A','MQ8L2B/A','MQ8P2B/A'],
+'De': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A'],
+'Ru': ['MQ8M2RU/A','MQ8Q2RU/A','MQ8N2RU/A','MQ8R2RU/A','MQ8L2RU/A','MQ8P2RU/A'],
+'Fr': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A'],
+'Sg': ['MQ8M2ZP/A','MQ8Q2ZP/A','MQ8N2ZP/A','MQ8R2ZP/A','MQ8L2ZP/A','MQ8P2ZP/A']},
 
 
-# 'Iphone8':{
-# 'Tw': ['MQ6H2TA/A', 'MQ7D2TA/A','MQ6J2TA/A','MQ7E2TA/A','MQ6G2TA/A', 'MQ7C2TA/A'],
-# 'Cn': ['MQ6L2CH/A', 'MQ7G2CH/A','MQ6M2CH/A','MQ7H2CH/A','MQ6K2CH/A', 'MQ7F2CH/A'],
-# 'Jp': ['MQ792J/A', 'MQ852J/A','MQ7A2J/A','MQ862J/A','MQ782J/A', 'MQ842J/A'],
-# 'Hk': ['MQ6L2ZP/A', 'MQ7G2ZP/A','MQ6M2ZP/A','MQ7H2ZP/A','MQ6K2ZP/A', 'MQ7F2ZP/A'],
-# 'Uk': ['MQ6H2B/A', 'MQ7D2B/A','MQ6J2B/A','MQ7E2B/A','MQ6G2B/A', 'MQ7C2B/A'],
-# 'De': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
-# 'Ru': ['MQ6H2RU/A','MQ7D2RU/A','MQ6J2RU/A','MQ7E2RU/A','MQ6G2RU/A', 'MQ7C2RU/A'],
-# 'Fr': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
-# 'Sg': ['MQ6H2ZP/A','MQ7D2ZP/A','MQ6J2ZP/A','MQ7E2ZP/A','MQ6G2ZP/A', 'MQ7C2ZP/A']
-# }}
+'Iphone8':{
+'Tw': ['MQ6H2TA/A', 'MQ7D2TA/A','MQ6J2TA/A','MQ7E2TA/A','MQ6G2TA/A', 'MQ7C2TA/A'],
+'Cn': ['MQ6L2CH/A', 'MQ7G2CH/A','MQ6M2CH/A','MQ7H2CH/A','MQ6K2CH/A', 'MQ7F2CH/A'],
+'Jp': ['MQ792J/A', 'MQ852J/A','MQ7A2J/A','MQ862J/A','MQ782J/A', 'MQ842J/A'],
+'Hk': ['MQ6L2ZP/A', 'MQ7G2ZP/A','MQ6M2ZP/A','MQ7H2ZP/A','MQ6K2ZP/A', 'MQ7F2ZP/A'],
+'Uk': ['MQ6H2B/A', 'MQ7D2B/A','MQ6J2B/A','MQ7E2B/A','MQ6G2B/A', 'MQ7C2B/A'],
+'De': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
+'Ru': ['MQ6H2RU/A','MQ7D2RU/A','MQ6J2RU/A','MQ7E2RU/A','MQ6G2RU/A', 'MQ7C2RU/A'],
+'Fr': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
+'Sg': ['MQ6H2ZP/A','MQ7D2ZP/A','MQ6J2ZP/A','MQ7E2ZP/A','MQ6G2ZP/A', 'MQ7C2ZP/A']
+}}
 
 
 Us ={
@@ -186,7 +152,7 @@ Color = {
 		'MQAJ2', 'MQAQ2', 'MQAC2', 'MQAM2', 'MQAU2', 'MQAF2','MQCR2', 'MQCK2', 'MQAX2', 'MQA52','MQCV2', 'MQCN2', 'MQC12', 'MQA82',
 		#iphone8
 		'MQ6K2','MQ722','MQ752','MQ7F2','MQ7X2','MQ812','MQ6G2','MQ6V2', 'MQ6Y2','MQ7C2','MQ7Q2','MQ7U2','MQ782','MQ842',
-		#iphoneXs         
+		#iphoneXs
 		'MT942','MT972','MT9A2','MT9E2','MT9H2','MT9L2','MT9P2','MT9T2','MT9W2','MTAW2','MTE02','MTE32',
 		#iphoneXsMax
 		'MT502','MT532','MT562','MT592','MT5D2','MT5G2','MT6Q2','MT6U2','MT6X2','MT712','MT742','MT772'],
@@ -292,26 +258,26 @@ Size_R = {k: key for key, value in Size.items() for k in value}
 
 # 除了US以外 其他所有國家以 [產品] 為 key 對應到所有的 value [型號]
 # "{}".format(Product_item) 會產生變數名稱 , eg:{'Iphone8':'MQ6H2TA/A'}
-# Product = {}
-# for Product_item in countries.keys():
-# 	Product["{}".format(Product_item)]= sum([v for v in countries[Product_item].values()], [])
+Product = {}
+for Product_item in countries.keys():
+	Product["{}".format(Product_item)]= sum([v for v in countries[Product_item].values()], [])
 
-# Product_R = {k: key for key, value in Product.items() for k in value}
+Product_R = {k: key for key, value in Product.items() for k in value}
 
 #拿到所有以[國家] 為 key 對應到所有的 [型號]
-# Country = {}
-# for v in countries.values():
-#   for k in v.keys():
-#     Country.setdefault(k,[]) # added key
-#     Country[k] += v[k]
+Country = {}
+for v in countries.values():
+  for k in v.keys():
+    Country.setdefault(k,[]) # added key
+    Country[k] += v[k]
 
-# # print(Country)
+# print(Country)
 
-# #以[型號] 為 key 對應到所有的 [國家]
-# Country_R = {k: key for key, value in Country.items() for k in value}
+#以[型號] 為 key 對應到所有的 [國家]
+Country_R = {k: key for key, value in Country.items() for k in value}
 
 # 除了US以外所有的 [型號] 併在一起 , 給for迴圈使用
-# Model_All = sum(list(Product.values()),[])
+Model_All = sum(list(Product.values()),[])
 # 把US所有的 [型號] 併再一起 , 給for迴圈使用
 Model_Us = sum(list(Us.values()),[])
 
@@ -326,97 +292,56 @@ for Model in Model_Us:
 
 	d['Size'] = Size_R[Model[0:5]]
 	d['Product'] = Product_Us_R[Model]
-	d['Colors'] = Color_R[Model[0:5]]
+	d['Color'] = Color_R[Model[0:5]]
 
 	url = 'https://www.apple.com/shop/delivery-message?parts.0=%s&little=true' % ( Model )
 	r = requests.get(url)
-	print(url)
 	response = json.loads(r.text)
 	d['Deliver'] = response['body']['content']['deliveryMessage'][Model]['quote']
 	res.append(d)
 
 
-# for Product in countries:
-# 	#外迴圈跑國家
-# 	for Country in countries[Product]:
-# 		#內迴圈跑型號
-# 		for Model in countries[Product][Country]:
+for Product in countries:
+	#外迴圈跑國家
+	for Country in countries[Product]:
+		#內迴圈跑型號
+		for Model in countries[Product][Country]:
 
-# 			d = {} #清空dictionary
-# 			d['Country'] = Country
-# 			d['TimeStemp'] = datetime.datetime.today().strftime("%Y-%m-%d")
-# 			d['Size'] = Size_R[Model[0:5]]
-# 			d['Product'] = Product_R[Model]
-# 			d['Color'] = Color_R[Model[0:5]]
+			d = {} #清空dictionary
+			d['Country'] = Country
+			d['TimeStemp'] = datetime.datetime.today().strftime("%Y-%m-%d")
+			d['Size'] = Size_R[Model[0:5]]
+			d['Product'] = Product_R[Model]
+			d['Color'] = Color_R[Model[0:5]]
 
 
-# 			#單獨擷取一個產品
-# 			url = 'https://www.apple.com/%s/shop/delivery-message?parts.0=%s&little=true' % (d['Country'].lower(), Model)
-# 			r = requests.get(url)
-# 			response = json.loads(r.text)
-# 			#try:
-# 			#    d['quote'] = response['body']['content']['deliveryMessage'][Model]['quote'].split()[1]
-# 			#except:
-# 			d['Deliver'] = response['body']['content']['deliveryMessage'][Model]['quote']
-# 			res.append(d)
+			#單獨擷取一個產品
+			url = 'https://www.apple.com/%s/shop/delivery-message?parts.0=%s&little=true' % (d['Country'].lower(), Model)
+			r = requests.get(url)
+			response = json.loads(r.text)
+			#try:
+			#    d['quote'] = response['body']['content']['deliveryMessage'][Model]['quote'].split()[1]
+			#except:
+			d['Deliver'] = response['body']['content']['deliveryMessage'][Model]['quote']
+			res.append(d)
 
 #把舊資料跟新資料合起來
 
-# newres = res + Old_Data
+newres = res + Old_Data
 
-df = pd.DataFrame(res)
-# print(res)
-#寫入MySql
-# with connection.cursor() as cursor:
-        # Create a new record
-        # apple 後面跟的排序是因為我在下面的回圈( for v in index.values() 裡面 印出來發現他的順序是這樣)
-    # sql =( "INSERT INTO apple(country, Model, color, size, TimeStemp, quote)"
-        # + ",".join("(%s,%s,%s,%s,%s,%s)" for _ in res))
-
-    # cramvalue = [ ss for index in res for ss in index.values()]
-temp = [];cramvalue = []
-for index in res:
-    for v in index.values():
-        temp.append(v)
-    temp = tuple(temp)
-    cramvalue.append(temp)
-    temp = []
-
-
-with SSHTunnelForwarder(
-        (ssh_host, ssh_port),
-        ssh_username=ssh_user,
-        ssh_pkey=mypkey,
-        remote_bind_address=(sql_hostname, sql_port)) as tunnel:
-    connection = pymysql.connect(host='127.0.0.1', user=sql_username,
-            passwd=sql_password, db=sql_main_database,
-            port=tunnel.local_bind_port)
-
-
-    with connection.cursor() as cursor:
-        # print(cramvalue)
-        # cursor.execute("SELECT * FROM customers")
-        # myresult = cursor.fetchall() 拿到資料
-        for c in cramvalue:
-            sql = 'INSERT INTO Appleinfo.AppleData (Country,TimeStemp,Size,Product,Colors,Deliver) VALUES (%s,%s,%s,%s,%s,%s)' 
-            print(sql)
-            # 執行sql語法 輸入 users
-            cursor.execute(sql, c)
-            connection.commit()
-
-
+df = pd.DataFrame(newres)
 
 # Pivot value:欲處理的資訊(相加 取平均 等等等)
 #index:列向量
 #columns:行向量
 
-# df.to_csv(path,encoding='utf_8_sig', index=False)
+df.to_csv(path,encoding='utf_8_sig', index=False)
 
 
 #要去哪裡
-# destname = "/home/ec2-user/Cathay_Domestic_Equity/static/Data.csv"
-# #來源資料
-# fromname = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
-# shutil.copy2(fromname, destname)
+destname = "/home/ec2-user/Cathay_Domestic_Equity/static/Data.csv"
+#來源資料
+fromname = "/home/ec2-user/Cathay_Domestic_Equity/Data.csv"
+shutil.copy2(fromname, destname)
 
 print("ok")
