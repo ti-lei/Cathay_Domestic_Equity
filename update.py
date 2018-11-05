@@ -21,8 +21,8 @@ countries = {
 'Uk': ['MU642B/A','MU6A2B/A','MTVA2B/A','MTVR2B/A'],
 'De': ['MU642FD/A','MU6A2FD/A','MTVA2FD/A','MTVR2FD/A'],
 'Ru': ['MU642RU/A','MU6A2RU/A'], #38.42 GPS
-'Fr': ['MU642NF/A','MU6A2NF/A','MTVA2NF/A','MTVR2NF/A'],
-'Sg': ['MU642ZA/A','MU6A2ZA/A','MTVA2ZA/A','MTVR2ZA/A']
+'Fr': ['MU642NF/A','MU6A2NF/A','MTVA2NF/A','MTVR2NF/A']
+# 'Sg': ['MU642ZA/A','MU6A2ZA/A','MTVA2ZA/A','MTVR2ZA/A']
 },
 
 
@@ -34,8 +34,8 @@ countries = {
 'Uk': ['MTEY2B/A','MTGN2B/A','MTF22B/A','MTH12B/A'],
 'De': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
 'Ru': ['MTEY2RU/A','MTF22RU/A'], #38.42 GPS
-'Fr': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A'],
-'Sg': ['MTEY2ZP/A','MTGN2ZP/A','MTF22ZP/A','MTH12ZP/A']
+'Fr': ['MTEY2ZD/A','MTGN2ZD/A','MTF22ZD/A','MTH12ZD/A']
+# 'Sg': ['MTEY2ZP/A','MTGN2ZP/A','MTF22ZP/A','MTH12ZP/A']
 },
 
 'IphoneXs-Max':{
@@ -46,8 +46,9 @@ countries = {
 'Uk':['MT512B/A','MT542B/A','MT572B/A','MT502B/A','MT532B/A','MT562B/A','MT522B/A','MT552B/A','MT582B/A'],
 'De':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
 'Ru':['MT512RU/A','MT542RU/A','MT572RU/A','MT502RU/A','MT532RU/A','MT562RU/A','MT522RU/A','MT552RU/A','MT582RU/A'],
-'Fr':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A'],
-'Sg':['MT512ZP/A','MT542ZP/A','MT572ZP/A','MT502ZP/A','MT532ZP/A','MT562ZP/A','MT522ZP/A','MT552ZP/A','MT582ZP/A']},
+'Fr':['MT512ZD/A','MT542ZD/A','MT572ZD/A','MT502ZD/A','MT532ZD/A','MT562ZD/A','MT522ZD/A','MT552ZD/A','MT582ZD/A']
+# 'Sg':['MT512ZP/A','MT542ZP/A','MT572ZP/A','MT502ZP/A','MT532ZP/A','MT562ZP/A','MT522ZP/A','MT552ZP/A','MT582ZP/A']
+},
 
 'IphoneXs':{
 'Tw':['MT9F2TA/A','MT9J2TA/A','MT9M2TA/A','MT9E2TA/A','MT9H2TA/A','MT9L2TA/A','MT9G2TA/A','MT9K2TA/A','MT9N2TA/A'],
@@ -57,8 +58,9 @@ countries = {
 'Uk':['MT9F2B/A','MT9J2B/A','MT9M2B/A','MT9E2B/A','MT9H2B/A','MT9L2B/A','MT9G2B/A','MT9K2B/A','MT9N2B/A'],
 'De':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A'],
 'Ru':['MT9F2RU/A','MT9J2RU/A','MT9M2RU/A','MT9E2RU/A','MT9H2RU/A','MT9L2RU/A','MT9G2RU/A','MT9K2RU/A','MT9N2RU/A'],
-'Fr':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A'],
-'Sg':['MT9F2ZP/A','MT9J2ZP/A','MT9M2ZP/A','MT9E2ZP/A','MT9H2ZP/A','MT9L2ZP/A','MT9G2ZP/A','MT9K2ZP/A','MT9N2ZP/A']},
+'Fr':['MT9F2ZD/A','MT9J2ZD/A','MT9M2ZD/A','MT9E2ZD/A','MT9H2ZD/A','MT9L2ZD/A','MT9G2ZD/A','MT9K2ZD/A','MT9N2ZD/A']
+# 'Sg':['MT9F2ZP/A','MT9J2ZP/A','MT9M2ZP/A','MT9E2ZP/A','MT9H2ZP/A','MT9L2ZP/A','MT9G2ZP/A','MT9K2ZP/A','MT9N2ZP/A']
+},
 
 'IphoneXr':{
 'Tw': ['MRY52TA/A', 'MRYD2TA/A','MRYL2TA/A','MRY42TA/A','MRY92TA/A', 'MRYJ2TA/A','MRYA2TA/A','MRYH2TA/A',
@@ -83,10 +85,11 @@ countries = {
  'MRYQ2RU/A','MRY72RU/A','MRYF2RU/A','MRYN2RU/A', 'MRY82RU/A','MRYG2RU/A','MRYP2RU/A', 'MRY62RU/A','MRYE2RU/A','MRYM2RU/A'],
 
 'Fr': ['MRY52ZD/A','MRYD2ZD/A','MRYL2ZD/A','MRY42ZD/A','MRY92ZD/A', 'MRYJ2ZD/A','MRYA2ZD/A','MRYH2ZD/A',
- 'MRYQ2ZD/A','MRY72ZD/A','MRYF2ZD/A','MRYN2ZD/A', 'MRY82ZD/A','MRYG2ZD/A','MRYP2ZD/A', 'MRY62ZD/A','MRYE2ZD/A','MRYM2ZD/A'],
+ 'MRYQ2ZD/A','MRY72ZD/A','MRYF2ZD/A','MRYN2ZD/A', 'MRY82ZD/A','MRYG2ZD/A','MRYP2ZD/A', 'MRY62ZD/A','MRYE2ZD/A','MRYM2ZD/A']
 
-'Sg': ['MRY52ZP/A','MRYD2ZP/A','MRYL2ZP/A','MRY42ZP/A','MRY92ZP/A', 'MRYJ2ZP/A','MRYA2ZP/A','MRYH2ZP/A',
- 'MRYQ2ZP/A','MRY72ZP/A','MRYF2ZP/A','MRYN2ZP/A', 'MRY82ZP/A','MRYG2ZP/A','MRYP2ZP/A', 'MRY62ZP/A','MRYE2ZP/A','MRYM2ZP/A']},
+# 'Sg': ['MRY52ZP/A','MRYD2ZP/A','MRYL2ZP/A','MRY42ZP/A','MRY92ZP/A', 'MRYJ2ZP/A','MRYA2ZP/A','MRYH2ZP/A',
+#  'MRYQ2ZP/A','MRY72ZP/A','MRYF2ZP/A','MRYN2ZP/A', 'MRY82ZP/A','MRYG2ZP/A','MRYP2ZP/A', 'MRY62ZP/A','MRYE2ZP/A','MRYM2ZP/A']
+ },
 
 
 'Iphone8-plus':{
@@ -97,8 +100,9 @@ countries = {
 'Uk': ['MQ8M2B/A','MQ8Q2B/A','MQ8N2B/A','MQ8R2B/A','MQ8L2B/A','MQ8P2B/A'],
 'De': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A'],
 'Ru': ['MQ8M2RU/A','MQ8Q2RU/A','MQ8N2RU/A','MQ8R2RU/A','MQ8L2RU/A','MQ8P2RU/A'],
-'Fr': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A'],
-'Sg': ['MQ8M2ZP/A','MQ8Q2ZP/A','MQ8N2ZP/A','MQ8R2ZP/A','MQ8L2ZP/A','MQ8P2ZP/A']},
+'Fr': ['MQ8M2ZD/A','MQ8Q2ZD/A','MQ8N2ZD/A','MQ8R2ZD/A','MQ8L2ZD/A','MQ8P2ZD/A']
+# 'Sg': ['MQ8M2ZP/A','MQ8Q2ZP/A','MQ8N2ZP/A','MQ8R2ZP/A','MQ8L2ZP/A','MQ8P2ZP/A']
+},
 
 
 'Iphone8':{
@@ -109,9 +113,25 @@ countries = {
 'Uk': ['MQ6H2B/A', 'MQ7D2B/A','MQ6J2B/A','MQ7E2B/A','MQ6G2B/A', 'MQ7C2B/A'],
 'De': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
 'Ru': ['MQ6H2RU/A','MQ7D2RU/A','MQ6J2RU/A','MQ7E2RU/A','MQ6G2RU/A', 'MQ7C2RU/A'],
-'Fr': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A'],
-'Sg': ['MQ6H2ZP/A','MQ7D2ZP/A','MQ6J2ZP/A','MQ7E2ZP/A','MQ6G2ZP/A', 'MQ7C2ZP/A']
-}}
+'Fr': ['MQ6H2ZD/A','MQ7D2ZD/A','MQ6J2ZD/A','MQ7E2ZD/A','MQ6G2ZD/A', 'MQ7C2ZD/A']
+# 'Sg': ['MQ6H2ZP/A','MQ7D2ZP/A','MQ6J2ZP/A','MQ7E2ZP/A','MQ6G2ZP/A', 'MQ7C2ZP/A']
+},
+
+'IpadPro':{
+'Tw': ['MTXR2TA/A','MTXU2TA/A','MTFN2TA/A','MTFQ2TA/A'],
+'Cn': ['MTXR2CH/A','MTXU2CH/A','MTFN2CH/A','MTFQ2CH/A'],
+'Jp': ['MTXR2J/A','MTXU2J/A','MTFN2J/A','MTFQ2J/A'],
+'Hk': ['MTXR2ZP/A','MTXU2ZP/A','MTFN2ZP/A','MTFQ2ZP/A'],
+'Uk': ['MTXR2B/A','MTXU2B/A','MTFN2B/A','MTFQ2B/A'],
+'De': ['MTXR2FD/A','MTXU2FD/A','MTFN2FD/A','MTFQ2FD/A'],
+'Ru': ['MTXR2RU/A','MTXU2RU/A','MTFN2RU/A','MTFQ2RU/A'],
+'Fr': ['MTXR2NF/A','MTXU2NF/A','MTFN2NF/A','MTFQ2NF/A'],
+'Br': ['MTXQ2BZ/A','MTXT2BZ/A','MTFL2BZ/A','MTFP2BZ/A'],
+'Mx': ['MTXR2LZ/A','MTXU2LZ/A','MTFN2LZ/A','MTFQ2LZ/A']
+}
+	}
+#country ditionary end
+
 
 
 Us ={
@@ -124,12 +144,15 @@ Us ={
 	'Iphone8-plus':['MQ8E2LL/A','MQ8H2LL/A','MQ8F2LL/A','MQ8J2LL/A','MQ8D2LL/A','MQ8G2LL/A'],
 	'Iphone8':['MQ6L2LL/A', 'MQ7G2LL/A','MQ6M2LL/A', 'MQ7H2LL/A','MQ6K2LL/A','MQ7F2LL/A'],
 	'AppleWatch3':['MTEY2LL/A', 'MTGG2LL/A', 'MTF22LL/A', 'MTGR2LL/A'],
-	'AppleWatch4':['MU642LL/A',	'MU6A2LL/A','MTUD2LL/A','MTUU2LL/A']}
+	'AppleWatch4':['MU642LL/A',	'MU6A2LL/A','MTUD2LL/A','MTUU2LL/A'],
+	'IpadPro':['MTXR2LL/A','MTXU2LL/A','MTFN2LL/A','MTFQ2LL/A']}
 
 Product_Us_R = {k: key for key, value in Us.items() for k in value}
-
-#---------------------------------------------------------------- Color-----------------------------------------------------------#
-Color = {
+# for key,value in Us.items()
+	# for k in value
+		# k = key
+#---------------------------------------------------------------- Colors-----------------------------------------------------------#
+Colors = {
 'Silver' : ['MQ8E2', 'MQ9E2', 'MQ972', 'MQ8H2', 'MQ9A2', 'MQ9H2', 'MQ8M2', 'MQ8U2', 'MQ912', 'MQ8Q2', 'MQ8X2', 'MQ942','MQ9L2','MQ9P2',
 		'MQAK2', 'MQAR2', 'MQAD2', 'MQAN2', 'MQAV2', 'MQAG2', 'MQCT2', 'MQCL2', 'MQAY2', 'MQA62','MQCW2', 'MQCP2', 'MQC22', 'MQA92',
 		#iphone8
@@ -187,11 +210,17 @@ Color = {
 'GPSCelluar' :[# Iphone Watch 3
 			'MTGG2', 'MTGN2', 'MTGK2','MTGR2','MTGX2','MTH12',
 			# Iphone Watch 4
-			'MTUD2','MTUU2','MTVA2','MTVR2']}
+			'MTUD2','MTUU2','MTVA2','MTVR2'],
+
+'11inch' :[	#Ipad Pro
+			'MTXR2','MTXU2','MTXQ2','MTXT2'],
+'12.9inch':[#Ipad Pro
+			'MTFN2','MTFQ2','MTFL2','MTFP2'],
+			}
 
 
 
-Color_R = {k: key for key, value in Color.items() for k in value}
+Color_R = {k: key for key, value in Colors.items() for k in value}
 #---------------------------------------------------------------- SIZE -------------------------------------------------------------#
 Size = {
 '64GB' : [
@@ -233,13 +262,17 @@ Size = {
 				#IphoneXs
 				'MT972','MT982','MT992','MT9H2','MT9J2','MT9K2','MT9T2','MT9U2','MT9V2','MTE02','MTE12','MTE22',
 				#IphoneXsMax
-				'MT532','MT542','MT552','MT5D2','MT5E2','MT5F2','MT6U2','MT6V2','MT6W2','MT742','MT752','MT762'],
+				'MT532','MT542','MT552','MT5D2','MT5E2','MT5F2','MT6U2','MT6V2','MT6W2','MT742','MT752','MT762',
+				#IpadPro
+				'MTXR2','MTFN2','MTXQ2','MTFL2'],
 
 '512GB' : [
 				#IphoneXs
 				'MT9A2','MT9C2','MT9D2','MT9L2','MT9M2','MT9N2','MT9W2','MT9X2','MT9Y2','MTE32','MTE42','MTE52',
 				#IphoneXsMax
-				'MT562','MT572','MT582','MT5G2','MT5H2','MT5J2','MT6X2','MT6Y2','MT702','MT772','MT782','MT792'],
+				'MT562','MT572','MT582','MT5G2','MT5H2','MT5J2','MT6X2','MT6Y2','MT702','MT772','MT782','MT792',
+				#IpadPro
+				'MTXU2','MTFQ2','MTXT2','MTFP2',],
 
 #IphoneWatch3
 '38mm': ['MTEY2','MTGG2','MTGN2','MTGK2'],
@@ -247,7 +280,7 @@ Size = {
 #IphoneWatch4
 '40mm': ['MTUD2','MTVA2','MU642'],
 '44mm': ['MTUU2','MTVR2','MU6A2']}
-#為了方便接下來 不同的 model 進行 Size 的對應 這裡將 key(size) 跟 value(model) 進行對調 變成 Key 為 model value 為 size 
+#為了方便接下來 不同的 model 進行 Size 的對應 這裡將 key(size) 跟 value(model) 進行對調 變成 Key 為 model ,value 為 size 
 # eg:'MQ8F2':'Size_SixFour'
 
 Size_R = {k: key for key, value in Size.items() for k in value}
@@ -259,7 +292,7 @@ Size_R = {k: key for key, value in Size.items() for k in value}
 # 除了US以外 其他所有國家以 [產品] 為 key 對應到所有的 value [型號]
 # "{}".format(Product_item) 會產生變數名稱 , eg:{'Iphone8':'MQ6H2TA/A'}
 Product = {}
-for Product_item in countries.keys():
+for Product_item in countries.keys(): #countries.keys 是全部的型號
 	Product["{}".format(Product_item)]= sum([v for v in countries[Product_item].values()], [])
 
 Product_R = {k: key for key, value in Product.items() for k in value}
@@ -285,6 +318,7 @@ res=[]
 
 # 美國的要單獨跑 因為地址網址的dictionary 是空的
 for Model in Model_Us:
+	# if Product_Us_R[Model] == 'IpadPro':
 	# print(Model)
 	d = {} #清空dictionary
 	d['Country'] = 'Us'
@@ -292,7 +326,7 @@ for Model in Model_Us:
 
 	d['Size'] = Size_R[Model[0:5]]
 	d['Product'] = Product_Us_R[Model]
-	d['Color'] = Color_R[Model[0:5]]
+	d['Colors'] = Color_R[Model[0:5]]
 
 	url = 'https://www.apple.com/shop/delivery-message?parts.0=%s&little=true' % ( Model )
 	r = requests.get(url)
@@ -306,13 +340,14 @@ for Product in countries:
 	for Country in countries[Product]:
 		#內迴圈跑型號
 		for Model in countries[Product][Country]:
-
+			# if Product_R[Model] == 'IpadPro':
 			d = {} #清空dictionary
+			# 現在 要處理新增的選項一樣丟在color裡嗎XD
 			d['Country'] = Country
 			d['TimeStemp'] = datetime.datetime.today().strftime("%Y-%m-%d")
 			d['Size'] = Size_R[Model[0:5]]
 			d['Product'] = Product_R[Model]
-			d['Color'] = Color_R[Model[0:5]]
+			d['Colors'] = Color_R[Model[0:5]]
 
 
 			#單獨擷取一個產品
